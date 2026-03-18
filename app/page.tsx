@@ -7,6 +7,7 @@ import {
   PenTool,
   ClipboardList,
   FileText,
+  FileSpreadsheet,
   ArrowRight,
   CheckCircle2,
   Lock,
@@ -61,6 +62,12 @@ const FEATURES = [
     title: 'Task Management',
     description:
       'Track maintenance tasks, admin to-dos, and property improvements with status notes and activity logs.',
+  },
+  {
+    icon: FileSpreadsheet,
+    title: 'Making Tax Digital',
+    description:
+      'Submit quarterly income and expenses directly to HMRC. Built for the MTD for Income Tax mandate from April 2026.',
   },
   {
     icon: FileText,

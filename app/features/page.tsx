@@ -7,6 +7,7 @@ import {
   PenTool,
   ClipboardList,
   FileText,
+  FileSpreadsheet,
   ArrowRight,
   Home,
   PoundSterling,
@@ -20,7 +21,7 @@ const APP_URL = 'https://property-app-pi-fawn.vercel.app'
 
 export const metadata: Metadata = {
   title: 'Features — PropertyApp',
-  description: 'Explore all features of PropertyApp: portfolio management, tax reports, compliance tracking, tenant portal, AI receipt scanning, and more.',
+  description: 'Explore all features of PropertyApp: portfolio management, Making Tax Digital (MTD), e-signatures, compliance tracking, tenant portal, AI receipt scanning, and more.',
 }
 
 const FEATURE_SECTIONS = [
@@ -87,6 +88,21 @@ const FEATURE_SECTIONS = [
           'Monthly and annual summaries',
         ],
       },
+      {
+        icon: FileSpreadsheet,
+        title: 'Making Tax Digital (MTD)',
+        description: 'Submit quarterly income and expense updates directly to HMRC. Built for the MTD for Income Tax mandate starting April 2026.',
+        bullets: [
+          'Quarterly dashboard with deadline countdown',
+          'Per-property HMRC field mapping (SA105 boxes)',
+          'Pre-submission integrity checks and validation',
+          'Secure OAuth2 connection to Government Gateway',
+          'HMRC fraud prevention headers (mandatory)',
+          'Final Declaration workflow with year-end adjustments',
+          'Full submission audit trail with HMRC receipt references',
+          'Reconciliation PDF reports for accountant review',
+        ],
+      },
     ],
   },
   {
@@ -117,12 +133,15 @@ const FEATURE_SECTIONS = [
       {
         icon: PenTool,
         title: 'E-Signatures',
-        description: 'Send tenancy agreements and other documents for digital signing via DocuSeal. Track signing status and store signed copies automatically.',
+        description: 'Send tenancy agreements for legally binding digital signing via DocuSeal. The full lifecycle is automated — from sending to storing the signed copy.',
         bullets: [
           'Send documents for signing in one click',
-          'Real-time signing status tracking',
-          'Signed PDFs stored automatically',
-          'Email notifications to tenants',
+          'Real-time signing status tracking (Pending → Viewed → Signed)',
+          'Signed PDFs downloaded and stored automatically',
+          'Tenant can sign from portal or email link',
+          'Landlord email notification on completion',
+          'Compliance checklist auto-updates to Signed',
+          'Legally valid under UK eIDAS and Electronic Communications Act 2000',
         ],
       },
     ],
