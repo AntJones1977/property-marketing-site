@@ -14,6 +14,12 @@ import {
   Bell,
   Upload,
   Zap,
+  Scale,
+  Landmark,
+  Home,
+  TrendingUp,
+  Database,
+  UserCheck,
 } from 'lucide-react'
 import Link from 'next/link'
 import { FeatureCard } from '@/components/feature-card'
@@ -22,68 +28,86 @@ const APP_URL = 'https://property-app-pi-fawn.vercel.app'
 
 const FEATURES = [
   {
-    icon: Building2,
-    title: 'Portfolio Management',
+    icon: Landmark,
+    title: 'SA105 + CT600 Under One Roof',
     description:
-      'Track all your properties, mortgages, tenancies, and rental income in one place. Auto-calculated yields, LTV ratios, and net profit.',
+      'The only UK landlord tool that covers both Personal (SA105) and Limited Company (CT600) tax returns, including S455 director loans, ATED alerts, and Companies House deadlines.',
   },
   {
-    icon: BarChart3,
-    title: 'Tax & Financial Reports',
+    icon: Home,
+    title: 'HMO End-to-End Compliance',
     description:
-      'SA105-ready tax reports, P&L statements, and portfolio summaries. Export to PDF for your accountant.',
+      'Licence tracker across 30+ UK councils, statutory room-size checker (6.51m² / 10.22m²), amenity-ratio calculator, fire risk assessments, and a portfolio-wide compliance matrix.',
+  },
+  {
+    icon: Scale,
+    title: 'Section 42 Leasehold Extensions',
+    description:
+      'Full statutory workflow from notice to counter-notice to tribunal to completion, with an 80-year cliff-edge warning and built-in legal reference. No competitor covers residential leasehold extensions.',
   },
   {
     icon: Shield,
-    title: 'Compliance Tracking',
+    title: 'Renters\u2019 Rights Act 2025 Ready',
     description:
-      'Never miss a Gas Safety, EICR, or EPC renewal. Automatic expiry alerts and document storage.',
+      'Information Sheet PDF for tenants, dashboard alerts for the 31 May 2026 deadline, MTD income threshold checker. Built in, not bolted on.',
   },
   {
-    icon: Users,
-    title: 'Tenant Portal',
+    icon: FileSpreadsheet,
+    title: 'Making Tax Digital (MTD)',
     description:
-      'Self-service portal for tenants to view documents, submit maintenance requests, and communicate with you.',
+      'Quarterly SA105 submissions direct to HMRC via Government Gateway. Pre-submission integrity checks, fraud prevention headers, Final Declaration workflow, and full audit trail.',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Growth Plan Snapshots',
+    description:
+      'Portfolio-trajectory diffing shows value, equity, income, and yield changes between any two points in time. Spot equity-extraction opportunities before they pass.',
+  },
+  {
+    icon: Database,
+    title: 'Reference Data Architecture',
+    description:
+      'Pick-once-reuse-everywhere library for Limited Companies, Solicitors, Mortgage Brokers, and Standard Fees. Manage CRN, UTR, year-end, directors, SIC code, and ATED status in one place.',
+  },
+  {
+    icon: UserCheck,
+    title: 'Tenant Screening',
+    description:
+      'Order a reference before approving a tenancy via Experian Rental Exchange / TransUnion Rent Bureau, plus Rogue Landlord Database lookup to protect against banned-tenant risk.',
   },
   {
     icon: Receipt,
     title: 'AI Receipt Scanning',
     description:
-      'Snap a photo of a receipt and AI extracts the details, categorises it for HMRC, and adds it to your expenses.',
+      'Snap a photo of a receipt and AI extracts vendor, amount, VAT, date, and HMRC SA105 category automatically. Works with photos and PDFs from mobile.',
   },
   {
     icon: PenTool,
     title: 'E-Signatures',
     description:
-      'Send tenancy agreements for digital signing. Track status and store signed copies automatically.',
+      'Send tenancy agreements for legally binding digital signing via DocuSeal. Automated lifecycle from send to signed-copy storage. Valid under UK eIDAS.',
   },
   {
-    icon: ClipboardList,
-    title: 'Task Management',
+    icon: Users,
+    title: 'Tenant Portal',
     description:
-      'Track maintenance tasks, admin to-dos, and property improvements with status notes and activity logs.',
+      'Self-service portal for tenants to view documents, submit maintenance requests, and communicate with you. Included on every tier including Free.',
   },
   {
-    icon: FileSpreadsheet,
-    title: 'Making Tax Digital',
+    icon: Lock,
+    title: 'Audit Log, GDPR & Self-Host',
     description:
-      'Submit quarterly income and expenses directly to HMRC. Built for the MTD for Income Tax mandate from April 2026.',
-  },
-  {
-    icon: FileText,
-    title: 'CSV Data Import',
-    description:
-      'Bulk import properties, contractors, tasks, and contacts from spreadsheets. Smart column auto-detection.',
+      'AES-256-GCM encryption, per-account isolated database, full audit logging, GDPR export and erasure, plus a self-hosted option for privacy-sensitive portfolios.',
   },
 ]
 
 const TRUST_POINTS = [
-  { icon: BarChart3, text: 'HMRC SA105 category mapping' },
-  { icon: Lock, text: 'AES-256-GCM encryption' },
-  { icon: Shield, text: 'GDPR / UK GDPR compliant' },
-  { icon: Bell, text: 'Automatic compliance alerts' },
-  { icon: Users, text: 'Tenant portal included free' },
-  { icon: Zap, text: 'No setup fees, cancel anytime' },
+  { icon: Landmark, text: 'Personal + Company (SA105 + CT600)' },
+  { icon: Home, text: '30+ UK councils HMO licensing data' },
+  { icon: Scale, text: 'Section 42 statutory workflow' },
+  { icon: BarChart3, text: 'HMRC MTD-ready (sandbox)' },
+  { icon: Bell, text: 'Renters\u2019 Rights Act 2025 alerts' },
+  { icon: Lock, text: 'AES-256-GCM + GDPR + audit log' },
 ]
 
 export default function HomePage() {
@@ -94,17 +118,18 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-1.5 text-sm font-medium text-muted-foreground mb-6">
             <Building2 className="h-4 w-4 text-primary" />
-            Built for UK landlords
+            Built for UK landlords with 5&ndash;50 properties
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight max-w-4xl mx-auto leading-tight">
-            Property portfolio management,{' '}
-            <span className="text-primary">simplified</span>
+            Personal, company and HMO portfolios,{' '}
+            <span className="text-primary">one platform</span>
           </h1>
 
           <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Track properties, mortgages, tenants, compliance, and tax returns in one place.
-            Purpose-built for UK buy-to-let landlords.
+            The only UK landlord software that covers SA105 and CT600, Section 42 leasehold extensions,
+            Renters&rsquo; Rights Act 2025, and end-to-end HMO compliance. Built for landlords running
+            personal, joint and SPV portfolios.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
@@ -133,16 +158,16 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <p className="text-2xl font-bold">4</p>
+              <p className="text-2xl font-bold">SA105 + CT600</p>
+              <p className="text-sm text-muted-foreground">Personal & company tax</p>
+            </div>
+            <div>
+              <p className="text-2xl font-bold">30+</p>
+              <p className="text-sm text-muted-foreground">UK councils HMO data</p>
+            </div>
+            <div>
+              <p className="text-2xl font-bold">5</p>
               <p className="text-sm text-muted-foreground">Pricing tiers</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold">10+</p>
-              <p className="text-sm text-muted-foreground">Core features</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold">99.9%</p>
-              <p className="text-sm text-muted-foreground">Uptime SLA</p>
             </div>
             <div>
               <p className="text-2xl font-bold">UK</p>
@@ -156,9 +181,10 @@ export default function HomePage() {
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight">Everything you need to manage your portfolio</h2>
+            <h2 className="text-3xl font-bold tracking-tight">Everything a professional UK landlord needs</h2>
             <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
-              From tracking properties and mortgages to generating HMRC-ready tax reports, all in one secure platform.
+              From CT600 company returns and HMO compliance to Section 42 leasehold extensions &mdash; features
+              no other tool in the UK brings together.
             </p>
           </div>
 
@@ -191,14 +217,14 @@ export default function HomePage() {
                 icon: Upload,
                 title: 'Import Your Data',
                 description:
-                  'Import properties from CSV, add them manually, or explore with sample data to see how it works.',
+                  'CSV import for properties, contractors, tasks and contacts. Add Reference Data for your companies, solicitors and brokers.',
               },
               {
                 step: '3',
                 icon: BarChart3,
                 title: 'Manage Everything',
                 description:
-                  'Track income, expenses, compliance, and tenants. Generate tax reports when you need them.',
+                  'Track income, expenses, HMO compliance, leaseholds, and SA105 + CT600 tax returns. Generate reports when you need them.',
               },
             ].map((item) => (
               <div key={item.step} className="text-center">
@@ -254,6 +280,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold tracking-tight">Why UK landlords choose PropertyApp</h2>
+            <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
+              The combination of Personal + Company tax, residential leasehold extensions, HMO compliance,
+              and Reference Data isn&rsquo;t available anywhere else.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -273,17 +303,19 @@ export default function HomePage() {
           <h2 className="text-3xl font-bold tracking-tight">Simple, transparent pricing</h2>
           <p className="mt-3 text-lg text-muted-foreground mb-8">Start free. Upgrade as your portfolio grows.</p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto mb-8">
             {[
-              { name: 'Free', price: '£0' },
-              { name: 'Starter', price: '£14.99' },
-              { name: 'Pro', price: '£29.99' },
-              { name: 'Business', price: '£49.99' },
+              { name: 'Free', price: '£0', limit: '3 props' },
+              { name: 'Starter', price: '£14.99', limit: '10 props' },
+              { name: 'Pro', price: '£29.99', limit: '25 props' },
+              { name: 'Business', price: '£59.99', limit: '50 props' },
+              { name: 'Portfolio', price: '£99.99', limit: 'Unlimited' },
             ].map((tier) => (
               <div key={tier.name} className="rounded-xl border border-border p-4">
                 <p className="text-sm text-muted-foreground">{tier.name}</p>
                 <p className="text-2xl font-bold mt-1">{tier.price}</p>
                 <p className="text-xs text-muted-foreground">/month</p>
+                <p className="text-xs text-muted-foreground mt-2">{tier.limit}</p>
               </div>
             ))}
           </div>
@@ -304,7 +336,7 @@ export default function HomePage() {
             Ready to simplify your portfolio?
           </h2>
           <p className="mt-3 text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-            Start managing your properties in minutes. Import your existing data or start fresh — it&apos;s free for up to 3 properties.
+            Start managing your properties in minutes. Import your existing data or start fresh &mdash; it&apos;s free for up to 3 properties.
           </p>
           <a
             href={`${APP_URL}/signup`}

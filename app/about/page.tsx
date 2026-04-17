@@ -13,7 +13,7 @@ const VALUES = [
     icon: Shield,
     title: 'Security First',
     description:
-      'Every customer gets an isolated database. Sensitive data is encrypted with AES-256-GCM. We comply with GDPR and UK GDPR requirements including audit logging, data export, and erasure.',
+      'Every customer gets an isolated database. Sensitive data is encrypted with AES-256-GCM. We comply with GDPR and UK GDPR requirements including audit logging, data export, and erasure \u2014 on every tier, including Free.',
   },
   {
     icon: Zap,
@@ -23,15 +23,15 @@ const VALUES = [
   },
   {
     icon: Target,
-    title: 'UK-Focused',
+    title: 'UK-Focused, End-to-End',
     description:
-      'Built specifically for UK buy-to-let landlords. HMRC SA105 category mapping, Gas Safety and EICR compliance tracking, and UK mortgage conventions are built in from day one.',
+      'The only UK tool that covers SA105 + CT600, Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 compliance, and HMO end-to-end \u2014 with Reference Data for the companies, solicitors and brokers behind the portfolio.',
   },
   {
     icon: Building2,
     title: 'Built by Landlords',
     description:
-      'PropertyApp was built by a landlord who was frustrated with the complexity and cost of existing tools. We understand the daily challenges of managing a portfolio because we live them.',
+      'PropertyApp was built by a landlord running personal, joint and SPV properties with HMO exposure. Every feature exists because we needed it ourselves \u2014 from the 80-year leasehold cliff-edge warning to the HMO compliance matrix.',
   },
 ]
 
@@ -46,9 +46,10 @@ export default function AboutPage() {
               Built by landlords, for landlords
             </h1>
             <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-              PropertyApp is a product of MAR Property Investments Ltd. We built it because we
-              needed it ourselves — a straightforward tool to manage a growing portfolio without the
-              overhead of enterprise software or the limitations of spreadsheets.
+              PropertyApp is a product of MAR Property Investments Ltd. We built it because we needed
+              it ourselves &mdash; a straightforward tool to manage a growing personal, joint and SPV
+              portfolio with HMO and leasehold exposure, without the overhead of enterprise software
+              or the limitations of spreadsheets.
             </p>
           </div>
         </div>
@@ -61,18 +62,20 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold tracking-tight">Our story</h2>
             <p className="text-muted-foreground leading-relaxed">
               Managing a buy-to-let portfolio in the UK means juggling properties, mortgages, tenants,
-              compliance certificates, tax returns, and maintenance — often across disconnected
-              spreadsheets, email threads, and filing cabinets.
+              compliance certificates, SA105 and CT600 returns, HMO licences, leasehold extensions, and
+              maintenance &mdash; often across disconnected spreadsheets, email threads, and filing cabinets.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              We looked at the existing tools and found them either too expensive, too complex for
-              individual landlords, or missing key UK-specific features like SA105 tax mapping and
-              compliance tracking. So we built PropertyApp.
+              We looked at the existing tools and found them either too expensive, too agent-centric, or
+              missing the things that actually matter to a portfolio landlord: CT600 for the SPV,
+              Section 42 for the flat with a shrinking lease, HMO licence data by council, and the
+              Renters&rsquo; Rights Act 2025 deadline on the dashboard. So we built PropertyApp.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Today, PropertyApp handles everything from portfolio dashboards and mortgage tracking to
-              AI-powered receipt scanning and digital e-signatures — all designed around the workflow
-              of a UK buy-to-let landlord.
+              Today, PropertyApp is the only UK product that brings SA105 + CT600 under one roof, tracks
+              Section 42 leasehold extensions, ships Renters&rsquo; Rights Act 2025 compliance out of the box,
+              and covers HMO end-to-end &mdash; licence, rooms, FRA, amenity ratios, portfolio compliance matrix.
+              Built for UK landlords with 5&ndash;50 properties running personal, joint and company portfolios.
             </p>
           </div>
         </div>
