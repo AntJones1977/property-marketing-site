@@ -14,6 +14,17 @@ import {
   FileCheck,
   MessageSquare,
   Wrench,
+  Landmark,
+  Scale,
+  TrendingUp,
+  Database,
+  UserCheck,
+  AlertTriangle,
+  Flame,
+  Ruler,
+  Lock,
+  Calendar,
+  ClipboardCheck,
 } from 'lucide-react'
 import type { Metadata } from 'next'
 
@@ -21,77 +32,46 @@ const APP_URL = 'https://property-app-pi-fawn.vercel.app'
 
 export const metadata: Metadata = {
   title: 'Features — PropertyApp',
-  description: 'Explore all features of PropertyApp: portfolio management, Making Tax Digital (MTD), e-signatures, compliance tracking, tenant portal, AI receipt scanning, and more.',
+  description:
+    'SA105 + CT600 tax returns, HMO compliance, Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 workflow, MTD quarterly submissions, Growth Plan snapshots, tenant screening, and more \u2014 the only UK landlord software that covers personal, company and HMO portfolios end to end.',
 }
 
 const FEATURE_SECTIONS = [
   {
-    category: 'Portfolio Management',
-    features: [
-      {
-        icon: Building2,
-        title: 'Property Portfolio Dashboard',
-        description: 'Get a complete overview of your entire portfolio at a glance. Track total value, equity, monthly income, profit, and yields across all properties.',
-        bullets: [
-          'Auto-calculated net profit, yields, and LTV ratios',
-          'Property status tracking (Active, Buying, Selling, Issue)',
-          'Mortgage renewal alerts with countdown',
-          'Portfolio summary PDF export',
-        ],
-      },
-      {
-        icon: Home,
-        title: 'Mortgage & Tenancy Tracking',
-        description: 'Track mortgages, fixed rate periods, rental income, and tenancy details for every property. See at-a-glance when mortgages need renewal.',
-        bullets: [
-          'Mortgage lender, rate, amount, and end date',
-          'Tenant details, lease dates, and deposit info',
-          'Service charge, ground rent, and management fees',
-          'Overpayment tracking',
-        ],
-      },
-    ],
-  },
-  {
-    category: 'Financial & Tax',
+    category: 'UK Tax \u2014 Personal (SA105) & Company (CT600)',
     features: [
       {
         icon: BarChart3,
-        title: 'Tax & Financial Reports',
-        description: 'Generate HMRC SA105-ready tax reports mapping your income and expenses to the correct Self Assessment boxes. Export professional PDFs for your accountant.',
+        title: 'SA105 Personal Tax Returns',
+        description:
+          'Generate HMRC SA105-ready reports mapping your income and expenses to the correct Self Assessment boxes. Covers SINGLE and JOINT ownership types.',
         bullets: [
           'SA105 box references for all fields',
           'Per-property and portfolio-level breakdowns',
+          'Joint-ownership split between owners',
           'P&L financial statements',
-          'One-click PDF export',
+          'One-click PDF export for your accountant',
         ],
       },
       {
-        icon: Receipt,
-        title: 'AI Receipt Scanning',
-        description: 'Photograph a receipt and let AI extract vendor, amount, VAT, date, and HMRC expense category automatically. Works with photos and PDFs.',
+        icon: Landmark,
+        title: 'CT600 Company / SPV Returns',
+        description:
+          'The only UK landlord tool with native Limited Company tax support. 12 company-specific expense categories, S455 director-loan tracking, ATED alerts, and Companies House deadlines.',
         bullets: [
-          'Claude AI vision extracts all fields',
-          'Auto-categorises to HMRC SA105 categories',
-          'Repairs, professional fees, running costs, and more',
-          'Mobile camera capture support',
-        ],
-      },
-      {
-        icon: PoundSterling,
-        title: 'Expense Management',
-        description: 'Track all property-related expenses with full HMRC category mapping. Import from receipts or enter manually.',
-        bullets: [
-          'HMRC expense categories built in',
-          'Per-property expense tracking',
-          'Import expenses from scanned receipts',
-          'Monthly and annual summaries',
+          'Mortgage interest full deduction (not Section 24 capped)',
+          'Director salary, employer pension, S455 tracking',
+          'ATED annual charge alerts',
+          'Companies House filing deadline reminders',
+          'Grouped by linked companyId (Reference Data)',
+          'Auto-detects wrong ownership type with warning banner',
         ],
       },
       {
         icon: FileSpreadsheet,
         title: 'Making Tax Digital (MTD)',
-        description: 'Submit quarterly income and expense updates directly to HMRC. Built for the MTD for Income Tax mandate starting April 2026.',
+        description:
+          'Submit quarterly income and expense updates directly to HMRC for MTD for Income Tax. Personal-only (SA105) \u2014 company properties report via CT600, not MTD ITSA.',
         bullets: [
           'Quarterly dashboard with deadline countdown',
           'Per-property HMRC field mapping (SA105 boxes)',
@@ -103,6 +83,129 @@ const FEATURE_SECTIONS = [
           'Reconciliation PDF reports for accountant review',
         ],
       },
+      {
+        icon: Receipt,
+        title: 'AI Receipt Scanning',
+        description:
+          'Photograph a receipt and let AI extract vendor, amount, VAT, date, and HMRC expense category automatically. Works with photos and PDFs.',
+        bullets: [
+          'Claude AI vision extracts all fields',
+          'Auto-categorises to HMRC SA105 categories',
+          'Repairs, professional fees, running costs, and more',
+          'Mobile camera capture support',
+        ],
+      },
+      {
+        icon: PoundSterling,
+        title: 'Expense Management',
+        description:
+          'Track all property-related expenses with full HMRC category mapping. Separate category sets for SA105 (personal) and CT600 (company) ownership.',
+        bullets: [
+          'HMRC expense categories built in',
+          'Per-property expense tracking',
+          '12 company-specific CT600 categories',
+          'Import expenses from scanned receipts',
+          'Monthly and annual summaries',
+        ],
+      },
+    ],
+  },
+  {
+    category: 'Leasehold & UK Legislation',
+    features: [
+      {
+        icon: Scale,
+        title: 'Section 42 Leasehold Extensions',
+        description:
+          'End-to-end statutory workflow for residential leasehold extensions. No other UK landlord tool covers this \u2014 Re-Leased handles commercial rent reviews, but leasehold extensions are ours alone.',
+        bullets: [
+          'Notice \u2192 counter-notice \u2192 tribunal \u2192 completion tracking',
+          '80-year cliff-edge warning (marriage value threshold)',
+          'Built-in legal reference for each step',
+          'Statutory timeline calculator',
+          'Link to associated property and solicitor (Reference Data)',
+        ],
+      },
+      {
+        icon: AlertTriangle,
+        title: 'Renters\u2019 Rights Act 2025 Compliance',
+        description:
+          'Full workflow for the Renters\u2019 Rights Act 2025. Competitors treat this as a blog post; we treat it as a product feature.',
+        bullets: [
+          'Information Sheet template-ready PDF for tenants',
+          'Dashboard alerts for 31 May 2026 deadline',
+          'MTD income threshold checker',
+          'Compliance status per tenancy',
+        ],
+      },
+    ],
+  },
+  {
+    category: 'HMO End-to-End Compliance',
+    features: [
+      {
+        icon: Home,
+        title: 'HMO Licence Tracker',
+        description:
+          'Council licensing data seeded for 30+ UK councils. Auto-detects whether a property needs mandatory, additional, or selective licensing based on location.',
+        bullets: [
+          'Mandatory / Additional / Selective scheme lookup',
+          '30+ UK councils seeded and updatable',
+          'Article 4 direction auto-check by postcode',
+          'Licence expiry alerts',
+          'Licence fee tracking via Reference Data',
+        ],
+      },
+      {
+        icon: Ruler,
+        title: 'Statutory Room-Size Checker',
+        description:
+          'Automatic validation against the Licensing of HMOs (Mandatory Conditions of Licences) (England) Regulations 2018.',
+        bullets: [
+          'Single-adult minimum: 6.51m\u00b2',
+          'Double-adult minimum: 10.22m\u00b2',
+          'Per-room amenity ratio calculator',
+          'Flags non-compliant rooms before inspection',
+        ],
+      },
+      {
+        icon: Flame,
+        title: 'Fire Risk Assessment & Compliance Events',
+        description:
+          'HMO-specific compliance tracking for fire alarm servicing, fire risk assessments, and emergency lighting.',
+        bullets: [
+          'Fire Risk Assessment (FRA) log',
+          'Fire alarm service + emergency lighting schedule',
+          'Auto-calculated next-due dates',
+          'Common areas log (kitchens, stairs, corridors)',
+          'Anti-social behaviour (ASB) incident log',
+        ],
+      },
+      {
+        icon: TrendingUp,
+        title: 'HMO Yield & Utility Recharge Calculator',
+        description:
+          'Sum room rents vs whole-property income to show the HMO uplift. Split utilities by room size, equal share, or headcount.',
+        bullets: [
+          'HMO yield vs single-let comparison',
+          'Utility recharge splits (size / equal / headcount)',
+          'Occupancy tracker with per-room rent',
+          'Feeds straight into expenses for SA105 / CT600',
+        ],
+      },
+      {
+        icon: ClipboardCheck,
+        title: 'Portfolio-Wide Compliance Matrix',
+        description:
+          'The /compliance view pulls every property\u2019s compliance state into a single matrix. HMO-only rows (FRA, fire alarm service) auto-hide for non-HMO properties.',
+        bullets: [
+          'One screen for the whole portfolio',
+          'Gas Safety, EICR, EPC, PAT, legionella',
+          'HMO-specific: FRA, fire alarm, licence, room sizes',
+          'Overdue / upcoming filter',
+          'Export to PDF',
+        ],
+      },
     ],
   },
   {
@@ -111,9 +214,10 @@ const FEATURE_SECTIONS = [
       {
         icon: Shield,
         title: 'Compliance Tracking',
-        description: 'Stay on top of mandatory safety certificates. The system alerts you when Gas Safety, EICR, or EPC certificates are expiring.',
+        description:
+          'Stay on top of mandatory safety certificates. The system alerts you when Gas Safety, EICR, or EPC certificates are expiring across the portfolio.',
         bullets: [
-          'Gas Safety, EICR, and EPC expiry tracking',
+          'Gas Safety, EICR, EPC, PAT, legionella',
           'Dashboard alerts for upcoming and overdue renewals',
           'Document storage with expiry dates',
           'Per-property compliance status',
@@ -122,7 +226,8 @@ const FEATURE_SECTIONS = [
       {
         icon: FileCheck,
         title: 'Document Management',
-        description: 'Upload and organise all property documents: tenancy agreements, certificates, land registry titles, leases, and more.',
+        description:
+          'Upload and organise all property documents: tenancy agreements, certificates, land registry titles, leases, and more.',
         bullets: [
           '11 document types supported',
           'Secure cloud storage (Vercel Blob)',
@@ -133,10 +238,11 @@ const FEATURE_SECTIONS = [
       {
         icon: PenTool,
         title: 'E-Signatures',
-        description: 'Send tenancy agreements for legally binding digital signing via DocuSeal. The full lifecycle is automated — from sending to storing the signed copy.',
+        description:
+          'Send tenancy agreements for legally binding digital signing via DocuSeal. Full lifecycle automated \u2014 from sending to storing the signed copy.',
         bullets: [
           'Send documents for signing in one click',
-          'Real-time signing status tracking (Pending → Viewed → Signed)',
+          'Real-time signing status tracking',
           'Signed PDFs downloaded and stored automatically',
           'Tenant can sign from portal or email link',
           'Landlord email notification on completion',
@@ -152,7 +258,8 @@ const FEATURE_SECTIONS = [
       {
         icon: Users,
         title: 'Tenant Portal',
-        description: 'Give your tenants a self-service portal where they can view their documents, submit maintenance requests, and communicate with you.',
+        description:
+          'Give your tenants a self-service portal where they can view their documents, submit maintenance requests, and communicate with you.',
         bullets: [
           'Separate tenant login with secure access',
           'View tenancy documents and signed agreements',
@@ -161,9 +268,23 @@ const FEATURE_SECTIONS = [
         ],
       },
       {
+        icon: UserCheck,
+        title: 'Tenant Screening & Rogue Landlord Lookup',
+        description:
+          'Order a reference before approving a tenancy via Experian Rental Exchange / TransUnion Rent Bureau. Cross-check against the Rogue Landlord Database to protect against banned-tenant risk.',
+        bullets: [
+          'Experian / TransUnion referencing API',
+          'Pass-through per-report pricing',
+          'Rogue Landlord Database lookup',
+          'Right-to-Rent check flow',
+          'Attach references to the tenancy record',
+        ],
+      },
+      {
         icon: MessageSquare,
         title: 'Messaging',
-        description: 'Built-in messaging between landlords and tenants. Keep all communication in one place, linked to properties.',
+        description:
+          'Built-in messaging between landlords and tenants. Keep all communication in one place, linked to properties.',
         bullets: [
           'Per-property message threads',
           'Linked to tenant portal',
@@ -173,7 +294,8 @@ const FEATURE_SECTIONS = [
       {
         icon: Wrench,
         title: 'Maintenance Requests',
-        description: 'Tenants can submit maintenance requests through the portal. Track status, assign contractors, and log costs.',
+        description:
+          'Tenants can submit maintenance requests through the portal. Track status, assign contractors, and log costs.',
         bullets: [
           'Tenant-initiated requests',
           'Status tracking (Open, In Progress, Completed)',
@@ -184,12 +306,69 @@ const FEATURE_SECTIONS = [
     ],
   },
   {
-    category: 'Productivity Tools',
+    category: 'Portfolio Intelligence & Data',
+    features: [
+      {
+        icon: TrendingUp,
+        title: 'Growth Plan Snapshot Changelog',
+        description:
+          'Portfolio-trajectory diffing. Compare any two snapshots to see what changed \u2014 value, equity, income, yield \u2014 across the portfolio. No other UK tool does this.',
+        bullets: [
+          'Snapshot portfolio state on demand',
+          'Diff any two snapshots',
+          'Surfaces equity-extraction opportunities',
+          'Property-by-property change log',
+          'Track progress against a growth target',
+        ],
+      },
+      {
+        icon: Database,
+        title: 'Reference Data Architecture',
+        description:
+          'Centralised, pick-once-reuse-everywhere library for companies, solicitors, mortgage brokers, and standard fees. Maintain each entity in one place \u2014 every property that links to it updates automatically.',
+        bullets: [
+          'Limited Companies: CRN, UTR, year-end, directors, SIC, ATED',
+          'Solicitors and Mortgage Brokers with contact details',
+          'Standard Fees library (survey, legal, mortgage, etc.)',
+          'Link properties to companies for CT600 grouping',
+          'Link leasehold extensions to solicitors',
+        ],
+      },
+      {
+        icon: Calendar,
+        title: 'Compliance Calendar',
+        description:
+          'A single calendar view across all properties for certificates, HMO licence renewals, mortgage fixed-rate end dates, tenancy renewals, and MTD quarters.',
+        bullets: [
+          'Portfolio-wide timeline',
+          'Filter by property, type, or status',
+          'Deadline countdown',
+          'iCal export',
+        ],
+      },
+      {
+        icon: Building2,
+        title: 'Property Portfolio Dashboard',
+        description:
+          'A complete overview at a glance. Track total value, equity, monthly income, profit, and yields across all properties \u2014 personal, joint, and company.',
+        bullets: [
+          'Auto-calculated net profit, yields, and LTV ratios',
+          'Property status (Active, Buying, Selling, Issue)',
+          'Mortgage renewal alerts with countdown',
+          'Portfolio summary PDF export',
+          'Ownership split (SINGLE / JOINT / COMPANY)',
+        ],
+      },
+    ],
+  },
+  {
+    category: 'Productivity & Security',
     features: [
       {
         icon: ClipboardList,
         title: 'Task Management',
-        description: 'Track maintenance tasks, admin to-dos, and property improvements. Add status notes and activity logs for long-running tasks.',
+        description:
+          'Track maintenance tasks, admin to-dos, and property improvements. Add status notes and activity logs for long-running tasks.',
         bullets: [
           'Per-property task assignment',
           'Priority levels (Low, Medium, High)',
@@ -200,12 +379,27 @@ const FEATURE_SECTIONS = [
       {
         icon: FileText,
         title: 'CSV Data Import',
-        description: 'Bulk import your existing data from spreadsheets. Smart column auto-detection maps your CSV columns to the right fields.',
+        description:
+          'Bulk import your existing data from spreadsheets. Smart column auto-detection maps your CSV columns to the right fields.',
         bullets: [
           '4 import types: Properties, Contractors, Tasks, Contacts',
           'Auto-detects Google Contacts & Outlook CSV formats',
           'Preview and validation before import',
           'Downloadable CSV templates with sample data',
+        ],
+      },
+      {
+        icon: Lock,
+        title: 'Audit Log, GDPR & Self-Host',
+        description:
+          'Privacy, security and compliance built in \u2014 important for landlords handling tenant data under DPA / UK GDPR obligations.',
+        bullets: [
+          'AES-256-GCM encryption at rest',
+          'Per-account isolated database',
+          'Full audit log for every state change',
+          'GDPR data export and erasure',
+          'Self-hosted deployment option (Portfolio / Agent tier)',
+          'Pre-push build validation on every release',
         ],
       },
     ],
@@ -219,11 +413,12 @@ export default function FeaturesPage() {
       <section className="bg-gradient-to-b from-background to-muted/30 py-16">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Every feature a UK landlord needs
+            Every feature a professional UK landlord needs
           </h1>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            From portfolio dashboards to HMRC-ready tax reports, PropertyApp covers every aspect of
-            buy-to-let property management.
+          <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
+            Built for landlords running personal, joint and SPV portfolios with HMO and leasehold exposure.
+            The only UK tool that combines SA105 + CT600, Section 42, Renters&rsquo; Rights Act 2025, and
+            HMO end-to-end compliance in one product.
           </p>
         </div>
       </section>
