@@ -25,6 +25,9 @@ import {
   Lock,
   Calendar,
   ClipboardCheck,
+  Banknote,
+  LineChart,
+  RefreshCw,
 } from 'lucide-react'
 import type { Metadata } from 'next'
 
@@ -33,7 +36,7 @@ const APP_URL = 'https://property-app-pi-fawn.vercel.app'
 export const metadata: Metadata = {
   title: 'Features — PropertyApp',
   description:
-    'SA105 + CT600 tax returns, HMO compliance, Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 workflow, MTD quarterly submissions, Growth Plan snapshots, tenant screening, and more \u2014 the only UK landlord software that covers personal, company and HMO portfolios end to end.',
+    'SA105 + CT600 tax returns, HMO compliance, Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 Wave 1 + 2 dispatch, MTD quarterly submissions, Growth Plan snapshots, tenant referencing, and more \u2014 the only UK landlord software that covers personal, company and HMO portfolios end to end.',
 }
 
 const FEATURE_SECTIONS = [
@@ -57,11 +60,14 @@ const FEATURE_SECTIONS = [
         icon: Landmark,
         title: 'CT600 Company / SPV Returns',
         description:
-          'The only UK landlord tool with native Limited Company tax support. 12 company-specific expense categories, S455 director-loan tracking, ATED alerts, and Companies House deadlines.',
+          'The only UK landlord tool with native Limited Company tax support. 12 company-specific expense categories, capital allowances (AIA / WDA), S455 director-loan tracking, ATED alerts, and Companies House deadlines.',
         bullets: [
           'Mortgage interest full deduction (not Section 24 capped)',
+          'Company operating expenses — accountancy, insurance, life assurance, director remuneration, legal, subscriptions, utilities, travel',
+          'Capital allowances — AIA up to £1m, WDA 18% main pool / 6% special-rate, multi-period roll-forward',
           'Director salary, employer pension, S455 tracking',
           'ATED annual charge alerts',
+          'Companies House auto-fill — fetch CRN, registered address, ARD, SIC, directors',
           'Companies House filing deadline reminders',
           'Grouped by linked companyId (Reference Data)',
           'Auto-detects wrong ownership type with warning banner',
@@ -111,6 +117,40 @@ const FEATURE_SECTIONS = [
     ],
   },
   {
+    category: 'Banking & Reconciliation',
+    features: [
+      {
+        icon: Banknote,
+        title: 'Open Banking + Auto-match',
+        description:
+          'Link UK banks via TrueLayer (AIS-only — read-only access). Multi-bank from day one with encrypted tokens, idempotent sync, and a deterministic match-rule engine that turns transactions into RentPayment / Expense records.',
+        bullets: [
+          'TrueLayer (sandbox today; production via FCA TrueLayer Agent route)',
+          'Multi-bank: Pro = 2 connections, Business = unlimited',
+          'BankMatchRule scoring: surname / amount / recurring counterparty',
+          '≥0.85 auto-creates RentPayment / Expense; 0.6–0.85 goes to review queue',
+          'Daily Vercel cron (03:00 UTC), idempotent re-runs',
+          '90-day SCA consent banner — yellow at T-14, red at T-0',
+          'Bulk-accept review queue + rules admin UI',
+          'AES-256-GCM token encryption, Plaid + GoCardless BAD stubs ready',
+        ],
+      },
+      {
+        icon: RefreshCw,
+        title: 'Mid-year Ownership Transfers',
+        description:
+          'Atomic, reversible, audit-logged transfers between SINGLE / JOINT / COMPANY / MANAGED ownership types — split a tax year cleanly between SA105 and CT600 when a property moves to your SPV part-way through.',
+        bullets: [
+          'Pre-flight diff: shows 2024-25 SA105 totals before and after — refuses to commit if they would change',
+          'Atomic transfer route — closes one PropertyOwnership period and opens another',
+          'Reversal flow restores prior state with audit trail',
+          'Ownership history timeline on the property Overview tab',
+          'Time-aware tax filtering — records dated D belong to whichever return covered ownership at D',
+        ],
+      },
+    ],
+  },
+  {
     category: 'Leasehold & UK Legislation',
     features: [
       {
@@ -128,14 +168,19 @@ const FEATURE_SECTIONS = [
       },
       {
         icon: AlertTriangle,
-        title: 'Renters\u2019 Rights Act 2025 Compliance',
+        title: 'Renters\u2019 Rights Act 2025 \u2014 Wave 1 + 2',
         description:
-          'Full workflow for the Renters\u2019 Rights Act 2025. Competitors treat this as a blog post; we treat it as a product feature.',
+          'End-to-end RRA compliance built before the 1 May 2026 commencement. Bulk Information Sheet dispatch with delivery + open evidence, plus the periodic-tenancy audit, Section 21 wind-down register, and Statement of Tenancy Terms dispatch. Competitors treat this as a blog post; we treat it as a product surface.',
         bullets: [
-          'Information Sheet template-ready PDF for tenants',
-          'Dashboard alerts for 31 May 2026 deadline',
-          'MTD income threshold checker',
-          'Compliance status per tenancy',
+          'Wave 1 \u2014 bulk Info Sheet dispatch via Resend with delivery + open webhooks',
+          'Postal-pack PDF fallback (per-tenant cover letter + Info Sheet)',
+          'Tenant-portal "I have read this" \u2192 ACKNOWLEDGED (strongest evidence)',
+          'Per-tenant evidence pack PDF for \u00a37,000-per-tenancy penalty defence',
+          'Wave 2 \u2014 periodic-tenancy audit + "Mark as periodic" action',
+          'Wave 2 \u2014 Section 21 wind-down register with permanent ABOLISHED banner',
+          'Wave 2 \u2014 Statement of Tenancy Terms PDF dispatch',
+          'Dashboard countdown, escalating from info \u2192 warning \u2192 danger',
+          'MANAGED properties included (penalty applies regardless of tax treatment)',
         ],
       },
     ],
@@ -170,15 +215,16 @@ const FEATURE_SECTIONS = [
       },
       {
         icon: Flame,
-        title: 'Fire Risk Assessment & Compliance Events',
+        title: 'FRA, Fire Safety & ASB Evidence',
         description:
-          'HMO-specific compliance tracking for fire alarm servicing, fire risk assessments, and emergency lighting.',
+          'HMO-specific compliance tracking for fire alarm servicing, fire risk assessments, and emergency lighting — plus an ASB incident log that exports as a Section 8 Ground 14 evidence pack you can attach directly to a possession claim.',
         bullets: [
           'Fire Risk Assessment (FRA) log',
           'Fire alarm service + emergency lighting schedule',
           'Auto-calculated next-due dates',
           'Common areas log (kitchens, stairs, corridors)',
-          'Anti-social behaviour (ASB) incident log',
+          'Anti-social behaviour (ASB) incident log per property',
+          'Per-property ASB → Section 8 Ground 14 evidence-pack PDF export (under the RRA-amended Housing Act 1988)',
         ],
       },
       {
@@ -191,6 +237,18 @@ const FEATURE_SECTIONS = [
           'Utility recharge splits (size / equal / headcount)',
           'Occupancy tracker with per-room rent',
           'Feeds straight into expenses for SA105 / CT600',
+        ],
+      },
+      {
+        icon: UserCheck,
+        title: 'Fit & Proper Person Register',
+        description:
+          'Maintain a per-council Fit & Proper Person record for every landlord and manager — the statutory test councils apply when granting an HMO licence. Linked to Reference Data so the register is the single source of truth for licence applications.',
+        bullets: [
+          'Per-council FPP entries with status and last-checked date',
+          'Dropdown-backed fields on the HMO tab — pick once, reuse on every licence',
+          'Surfaces ineligibility flags before you apply',
+          'Linked to Reference Data → Companies and individuals',
         ],
       },
       {
@@ -215,9 +273,10 @@ const FEATURE_SECTIONS = [
         icon: Shield,
         title: 'Compliance Tracking',
         description:
-          'Stay on top of mandatory safety certificates. The system alerts you when Gas Safety, EICR, or EPC certificates are expiring across the portfolio.',
+          'Stay on top of mandatory safety certificates. The system alerts you when Gas Safety, EICR, or EPC certificates are expiring across the portfolio. Per-property "all-electric" gating skips Gas Safety entirely on properties with no gas appliances.',
         bullets: [
           'Gas Safety, EICR, EPC, PAT, legionella',
+          'Per-property hasGasAppliances flag — "Electric only" properties skip CP12 everywhere',
           'Dashboard alerts for upcoming and overdue renewals',
           'Document storage with expiry dates',
           'Per-property compliance status',
@@ -237,16 +296,20 @@ const FEATURE_SECTIONS = [
       },
       {
         icon: PenTool,
-        title: 'E-Signatures',
+        title: 'E-Signatures (incl. Joint AST)',
         description:
-          'Send tenancy agreements for legally binding digital signing via DocuSeal. Full lifecycle automated \u2014 from sending to storing the signed copy.',
+          'Send tenancy agreements for legally binding digital signing via DocuSeal. Full lifecycle automated \u2014 from sending to storing the signed copy. Joint ASTs supported as a single envelope with parallel multi-signer flow.',
         bullets: [
           'Send documents for signing in one click',
+          'Joint AST: one envelope, multiple submitters, parallel signing',
+          'Per-submitter status, targeted resend, decline-kills-envelope safety',
+          'Per-tenant portal slice \u2014 each joint tenant sees only their own row',
+          'Plan-gate counts once per envelope (a 2-tenant AST = 1 signature)',
           'Real-time signing status tracking',
           'Signed PDFs downloaded and stored automatically',
           'Tenant can sign from portal or email link',
           'Landlord email notification on completion',
-          'Compliance checklist auto-updates to Signed',
+          'Compliance checklist auto-updates to Signed (or "Partially signed (1/2)" mid-flight)',
           'Legally valid under UK eIDAS and Electronic Communications Act 2000',
         ],
       },
@@ -259,23 +322,25 @@ const FEATURE_SECTIONS = [
         icon: Users,
         title: 'Tenant Portal',
         description:
-          'Give your tenants a self-service portal where they can view their documents, submit maintenance requests, and communicate with you.',
+          'Give your tenants a self-service portal where they can view their documents, submit maintenance requests, and communicate with you. Includes the RRA Information Sheet acknowledgement banner and per-tenant joint-AST signing slice.',
         bullets: [
           'Separate tenant login with secure access',
           'View tenancy documents and signed agreements',
+          'RRA 2025 Information Sheet banner — "I have read this" → ACKNOWLEDGED',
+          'Joint-AST per-tenant slice — each named adult sees only their own row',
           'Submit and track maintenance requests',
           'GDPR consent management',
         ],
       },
       {
         icon: UserCheck,
-        title: 'Tenant Screening & Rogue Landlord Lookup',
+        title: 'Tenant Referencing',
         description:
-          'Order a reference before approving a tenancy via Experian Rental Exchange / TransUnion Rent Bureau. Cross-check against the Rogue Landlord Database to protect against banned-tenant risk.',
+          'Order a reference before approving a tenancy via a pluggable referencing layer with GDPR consent capture, secure document storage, and a per-applicant decision workflow.',
         bullets: [
-          'Experian / TransUnion referencing API',
-          'Pass-through per-report pricing',
-          'Rogue Landlord Database lookup',
+          'GDPR consent capture (signed link)',
+          'Stripe one-off charge — £35/report default, per-request override',
+          'Pluggable provider abstraction (partner integrations on the roadmap)',
           'Right-to-Rent check flow',
           'Attach references to the tenancy record',
         ],
@@ -322,6 +387,21 @@ const FEATURE_SECTIONS = [
         ],
       },
       {
+        icon: LineChart,
+        title: 'Rent Review Insights',
+        description:
+          'Detect properties where the rent agreement is stale (12 months default \u2014 configurable) and surface a defensible suggested rent range from ONS Private Rental Index uplift + curated local comparables. The growth lever no other UK landlord tool exposes.',
+        bullets: [
+          'ONS Private Rental Index daily auto-pull (regional MoM% compounded onto medians)',
+          'Confidence labels \u2014 HIGH (5+ comparables), MEDIUM (2+), LOW (index-only)',
+          'RRA tribunal-risk warning when suggested rent exceeds market median by > 10%',
+          'Apply updates Property.rentalIncome + Tenancy.rentAmount + writes review history',
+          'Snooze (configurable duration) / Dismiss / Restore per row',
+          'MANAGED properties: read-only badge, Apply suppressed',
+          'Strategic rent-review outlook tile on Growth Plan',
+        ],
+      },
+      {
         icon: Database,
         title: 'Reference Data Architecture',
         description:
@@ -336,27 +416,31 @@ const FEATURE_SECTIONS = [
       },
       {
         icon: Calendar,
-        title: 'Compliance Calendar',
+        title: 'Compliance Calendar + Auto-tasks',
         description:
-          'A single calendar view across all properties for certificates, HMO licence renewals, mortgage fixed-rate end dates, tenancy renewals, and MTD quarters.',
+          'A single calendar view across all properties for certificates, HMO licence renewals, mortgage fixed-rate end dates, tenancy renewals, and MTD quarters. A daily Vercel cron turns every nextDueDate into a real Task before it bites — no quietly slipping certificates.',
         bullets: [
           'Portfolio-wide timeline',
           'Filter by property, type, or status',
-          'Deadline countdown',
-          'iCal export',
+          'Daily auto-task generation at 60 / 30 / 7-day windows with priority escalation',
+          'Categories: HMO Licence, FRA, fire alarm, emergency lighting, PAT, fire doors, council inspections, legionella, pest control',
+          'Auto-assigns to a linked contractor when configured',
+          'Deduped via task notes JSON key — re-runs never spam the queue',
+          'PDF export from the portfolio compliance matrix',
         ],
       },
       {
         icon: Building2,
         title: 'Property Portfolio Dashboard',
         description:
-          'A complete overview at a glance. Track total value, equity, monthly income, profit, and yields across all properties \u2014 personal, joint, and company.',
+          'A complete overview at a glance. Track total value, equity, monthly income, profit, and yields across all properties \u2014 personal, joint, company and managed.',
         bullets: [
           'Auto-calculated net profit, yields, and LTV ratios',
           'Property status (Active, Buying, Selling, Issue)',
           'Mortgage renewal alerts with countdown',
           'Portfolio summary PDF export',
-          'Ownership split (SINGLE / JOINT / COMPANY)',
+          'Four ownership types \u2014 SINGLE, JOINT, COMPANY, MANAGED',
+          'MANAGED properties shown operationally but excluded from every tax surface',
         ],
       },
     ],
