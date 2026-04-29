@@ -4,3 +4,8 @@ out/
 .env
 .env.local
 tsconfig.tsbuildinfo
+
+# Internal property-app docs used as input for marketing-site updates.
+# Do NOT commit — this repo is public and the docs contain internal roadmap,
+# unshipped specs, FCA-gated modules and incident reports.
+.source-property-app/
