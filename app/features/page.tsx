@@ -215,15 +215,16 @@ const FEATURE_SECTIONS = [
       },
       {
         icon: Flame,
-        title: 'Fire Risk Assessment & Compliance Events',
+        title: 'FRA, Fire Safety & ASB Evidence',
         description:
-          'HMO-specific compliance tracking for fire alarm servicing, fire risk assessments, and emergency lighting.',
+          'HMO-specific compliance tracking for fire alarm servicing, fire risk assessments, and emergency lighting — plus an ASB incident log that exports as a Section 8 Ground 14 evidence pack you can attach directly to a possession claim.',
         bullets: [
           'Fire Risk Assessment (FRA) log',
           'Fire alarm service + emergency lighting schedule',
           'Auto-calculated next-due dates',
           'Common areas log (kitchens, stairs, corridors)',
-          'Anti-social behaviour (ASB) incident log',
+          'Anti-social behaviour (ASB) incident log per property',
+          'Per-property ASB → Section 8 Ground 14 evidence-pack PDF export (under the RRA-amended Housing Act 1988)',
         ],
       },
       {
@@ -236,6 +237,18 @@ const FEATURE_SECTIONS = [
           'Utility recharge splits (size / equal / headcount)',
           'Occupancy tracker with per-room rent',
           'Feeds straight into expenses for SA105 / CT600',
+        ],
+      },
+      {
+        icon: UserCheck,
+        title: 'Fit & Proper Person Register',
+        description:
+          'Maintain a per-council Fit & Proper Person record for every landlord and manager — the statutory test councils apply when granting an HMO licence. Linked to Reference Data so the register is the single source of truth for licence applications.',
+        bullets: [
+          'Per-council FPP entries with status and last-checked date',
+          'Dropdown-backed fields on the HMO tab — pick once, reuse on every licence',
+          'Surfaces ineligibility flags before you apply',
+          'Linked to Reference Data → Companies and individuals',
         ],
       },
       {
@@ -260,9 +273,10 @@ const FEATURE_SECTIONS = [
         icon: Shield,
         title: 'Compliance Tracking',
         description:
-          'Stay on top of mandatory safety certificates. The system alerts you when Gas Safety, EICR, or EPC certificates are expiring across the portfolio.',
+          'Stay on top of mandatory safety certificates. The system alerts you when Gas Safety, EICR, or EPC certificates are expiring across the portfolio. Per-property "all-electric" gating skips Gas Safety entirely on properties with no gas appliances.',
         bullets: [
           'Gas Safety, EICR, EPC, PAT, legionella',
+          'Per-property hasGasAppliances flag — "Electric only" properties skip CP12 everywhere',
           'Dashboard alerts for upcoming and overdue renewals',
           'Document storage with expiry dates',
           'Per-property compliance status',
@@ -308,10 +322,12 @@ const FEATURE_SECTIONS = [
         icon: Users,
         title: 'Tenant Portal',
         description:
-          'Give your tenants a self-service portal where they can view their documents, submit maintenance requests, and communicate with you.',
+          'Give your tenants a self-service portal where they can view their documents, submit maintenance requests, and communicate with you. Includes the RRA Information Sheet acknowledgement banner and per-tenant joint-AST signing slice.',
         bullets: [
           'Separate tenant login with secure access',
           'View tenancy documents and signed agreements',
+          'RRA 2025 Information Sheet banner — "I have read this" → ACKNOWLEDGED',
+          'Joint-AST per-tenant slice — each named adult sees only their own row',
           'Submit and track maintenance requests',
           'GDPR consent management',
         ],
@@ -400,13 +416,16 @@ const FEATURE_SECTIONS = [
       },
       {
         icon: Calendar,
-        title: 'Compliance Calendar',
+        title: 'Compliance Calendar + Auto-tasks',
         description:
-          'A single calendar view across all properties for certificates, HMO licence renewals, mortgage fixed-rate end dates, tenancy renewals, and MTD quarters.',
+          'A single calendar view across all properties for certificates, HMO licence renewals, mortgage fixed-rate end dates, tenancy renewals, and MTD quarters. A daily Vercel cron turns every nextDueDate into a real Task before it bites — no quietly slipping certificates.',
         bullets: [
           'Portfolio-wide timeline',
           'Filter by property, type, or status',
-          'Deadline countdown',
+          'Daily auto-task generation at 60 / 30 / 7-day windows with priority escalation',
+          'Categories: HMO Licence, FRA, fire alarm, emergency lighting, PAT, fire doors, council inspections, legionella, pest control',
+          'Auto-assigns to a linked contractor when configured',
+          'Deduped via task notes JSON key — re-runs never spam the queue',
           'PDF export from the portfolio compliance matrix',
         ],
       },
@@ -414,13 +433,14 @@ const FEATURE_SECTIONS = [
         icon: Building2,
         title: 'Property Portfolio Dashboard',
         description:
-          'A complete overview at a glance. Track total value, equity, monthly income, profit, and yields across all properties \u2014 personal, joint, and company.',
+          'A complete overview at a glance. Track total value, equity, monthly income, profit, and yields across all properties \u2014 personal, joint, company and managed.',
         bullets: [
           'Auto-calculated net profit, yields, and LTV ratios',
           'Property status (Active, Buying, Selling, Issue)',
           'Mortgage renewal alerts with countdown',
           'Portfolio summary PDF export',
-          'Ownership split (SINGLE / JOINT / COMPANY)',
+          'Four ownership types \u2014 SINGLE, JOINT, COMPANY, MANAGED',
+          'MANAGED properties shown operationally but excluded from every tax surface',
         ],
       },
     ],

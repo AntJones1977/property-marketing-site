@@ -25,7 +25,7 @@ const VALUES = [
     icon: Target,
     title: 'UK-Focused, End-to-End',
     description:
-      'The only UK tool that covers SA105 + CT600, Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 compliance, and HMO end-to-end \u2014 with Reference Data for the companies, solicitors and brokers behind the portfolio.',
+      'The only UK tool that covers SA105 + CT600 (with AIA + WDA capital allowances), Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 Wave 1 + 2 dispatch, Open Banking auto-match, ONS-driven Rent Review Insights, and HMO end-to-end \u2014 with Reference Data for the companies, solicitors and brokers behind the portfolio.',
   },
   {
     icon: Building2,
@@ -72,10 +72,14 @@ export default function AboutPage() {
               Renters&rsquo; Rights Act 2025 deadline on the dashboard. So we built PropertyApp.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Today, PropertyApp is the only UK product that brings SA105 + CT600 under one roof, tracks
-              Section 42 leasehold extensions, ships Renters&rsquo; Rights Act 2025 compliance out of the box,
-              and covers HMO end-to-end &mdash; licence, rooms, FRA, amenity ratios, portfolio compliance matrix.
-              Built for UK landlords with 5&ndash;50 properties running personal, joint and company portfolios.
+              Today, PropertyApp is the only UK product that brings SA105 + CT600 under one roof
+              (with full capital allowances &mdash; AIA + WDA), tracks Section 42 leasehold extensions,
+              ships Renters&rsquo; Rights Act 2025 Wave 1 + 2 dispatch out of the box, links UK banks
+              via Open Banking with a deterministic auto-match engine, and surfaces Rent Review Insights
+              from the ONS Private Rental Index. HMO end-to-end &mdash; licence, rooms, FRA, amenity
+              ratios, ASB log with Section 8 Ground 14 evidence-pack export, Fit &amp; Proper Person
+              register, and the portfolio compliance matrix. Built for UK landlords running personal,
+              joint, company and managed portfolios at any scale.
             </p>
           </div>
         </div>
