@@ -33,7 +33,7 @@ const APP_URL = 'https://property-app-pi-fawn.vercel.app'
 export const metadata: Metadata = {
   title: 'Features — PropertyApp',
   description:
-    'SA105 + CT600 tax returns, HMO compliance, Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 workflow, MTD quarterly submissions, Growth Plan snapshots, tenant screening, and more \u2014 the only UK landlord software that covers personal, company and HMO portfolios end to end.',
+    'SA105 + CT600 tax returns, HMO compliance, Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 Wave 1 + 2 dispatch, MTD quarterly submissions, Growth Plan snapshots, tenant referencing, and more \u2014 the only UK landlord software that covers personal, company and HMO portfolios end to end.',
 }
 
 const FEATURE_SECTIONS = [
@@ -128,14 +128,19 @@ const FEATURE_SECTIONS = [
       },
       {
         icon: AlertTriangle,
-        title: 'Renters\u2019 Rights Act 2025 Compliance',
+        title: 'Renters\u2019 Rights Act 2025 \u2014 Wave 1 + 2',
         description:
-          'Full workflow for the Renters\u2019 Rights Act 2025. Competitors treat this as a blog post; we treat it as a product feature.',
+          'End-to-end RRA compliance built before the 1 May 2026 commencement. Bulk Information Sheet dispatch with delivery + open evidence, plus the periodic-tenancy audit, Section 21 wind-down register, and Statement of Tenancy Terms dispatch. Competitors treat this as a blog post; we treat it as a product surface.',
         bullets: [
-          'Information Sheet template-ready PDF for tenants',
-          'Dashboard alerts for 31 May 2026 deadline',
-          'MTD income threshold checker',
-          'Compliance status per tenancy',
+          'Wave 1 \u2014 bulk Info Sheet dispatch via Resend with delivery + open webhooks',
+          'Postal-pack PDF fallback (per-tenant cover letter + Info Sheet)',
+          'Tenant-portal "I have read this" \u2192 ACKNOWLEDGED (strongest evidence)',
+          'Per-tenant evidence pack PDF for \u00a37,000-per-tenancy penalty defence',
+          'Wave 2 \u2014 periodic-tenancy audit + "Mark as periodic" action',
+          'Wave 2 \u2014 Section 21 wind-down register with permanent ABOLISHED banner',
+          'Wave 2 \u2014 Statement of Tenancy Terms PDF dispatch',
+          'Dashboard countdown, escalating from info \u2192 warning \u2192 danger',
+          'MANAGED properties included (penalty applies regardless of tax treatment)',
         ],
       },
     ],
@@ -269,13 +274,13 @@ const FEATURE_SECTIONS = [
       },
       {
         icon: UserCheck,
-        title: 'Tenant Screening & Rogue Landlord Lookup',
+        title: 'Tenant Referencing',
         description:
-          'Order a reference before approving a tenancy via Experian Rental Exchange / TransUnion Rent Bureau. Cross-check against the Rogue Landlord Database to protect against banned-tenant risk.',
+          'Order a reference before approving a tenancy via a pluggable referencing layer with GDPR consent capture, secure document storage, and a per-applicant decision workflow.',
         bullets: [
-          'Experian / TransUnion referencing API',
-          'Pass-through per-report pricing',
-          'Rogue Landlord Database lookup',
+          'GDPR consent capture (signed link)',
+          'Stripe one-off charge — £35/report default, per-request override',
+          'Pluggable provider abstraction (partner integrations on the roadmap)',
           'Right-to-Rent check flow',
           'Attach references to the tenancy record',
         ],
@@ -343,7 +348,7 @@ const FEATURE_SECTIONS = [
           'Portfolio-wide timeline',
           'Filter by property, type, or status',
           'Deadline countdown',
-          'iCal export',
+          'PDF export from the portfolio compliance matrix',
         ],
       },
       {

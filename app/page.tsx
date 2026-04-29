@@ -47,9 +47,9 @@ const FEATURES = [
   },
   {
     icon: Shield,
-    title: 'Renters\u2019 Rights Act 2025 Ready',
+    title: 'Renters\u2019 Rights Act 2025 \u2014 Wave 1 + 2 ready',
     description:
-      'Information Sheet PDF for tenants, dashboard alerts for the 31 May 2026 deadline, MTD income threshold checker. Built in, not bolted on.',
+      'Bulk Information Sheet dispatch with delivery + open evidence, postal-pack fallback, tenant acknowledgement, and a per-tenant evidence pack for the \u00a37,000-per-tenancy penalty defence. Plus periodic-tenancy audit, Section 21 wind-down register, and Statement of Tenancy Terms dispatch \u2014 live before the 1 May 2026 commencement.',
   },
   {
     icon: FileSpreadsheet,
@@ -71,9 +71,9 @@ const FEATURES = [
   },
   {
     icon: UserCheck,
-    title: 'Tenant Screening',
+    title: 'Tenant Referencing',
     description:
-      'Order a reference before approving a tenancy via Experian Rental Exchange / TransUnion Rent Bureau, plus Rogue Landlord Database lookup to protect against banned-tenant risk.',
+      'Order a reference before approving a tenancy via a pluggable referencing layer. GDPR consent capture, Stripe-charged at £35/report (per-request override), and a per-applicant decision workflow.',
   },
   {
     icon: Receipt,
@@ -106,7 +106,7 @@ const TRUST_POINTS = [
   { icon: Home, text: '30+ UK councils HMO licensing data' },
   { icon: Scale, text: 'Section 42 statutory workflow' },
   { icon: BarChart3, text: 'HMRC MTD-ready (sandbox)' },
-  { icon: Bell, text: 'Renters\u2019 Rights Act 2025 alerts' },
+  { icon: Bell, text: 'Renters\u2019 Rights Act 2025 \u2014 Wave 1 + 2 dispatch' },
   { icon: Lock, text: 'AES-256-GCM + GDPR + audit log' },
 ]
 
@@ -166,8 +166,8 @@ export default function HomePage() {
               <p className="text-sm text-muted-foreground">UK councils HMO data</p>
             </div>
             <div>
-              <p className="text-2xl font-bold">5</p>
-              <p className="text-sm text-muted-foreground">Pricing tiers</p>
+              <p className="text-2xl font-bold">AIS-only</p>
+              <p className="text-sm text-muted-foreground">Open Banking auto-match</p>
             </div>
             <div>
               <p className="text-2xl font-bold">UK</p>
