@@ -20,6 +20,8 @@ import {
   TrendingUp,
   Database,
   UserCheck,
+  Banknote,
+  LineChart,
 } from 'lucide-react'
 import Link from 'next/link'
 import { FeatureCard } from '@/components/feature-card'
@@ -56,6 +58,18 @@ const FEATURES = [
     title: 'Making Tax Digital (MTD)',
     description:
       'Quarterly SA105 submissions direct to HMRC via Government Gateway. Pre-submission integrity checks, fraud prevention headers, Final Declaration workflow, and full audit trail.',
+  },
+  {
+    icon: Banknote,
+    title: 'Open Banking + Auto-match',
+    description:
+      'Link UK banks via TrueLayer (AIS-only). Match-rule engine scores every transaction, auto-creates RentPayment / Expense at ≥0.85, drops the rest into a review queue. Daily cron + 90-day SCA consent banner. Pro = 2 banks, Business = unlimited.',
+  },
+  {
+    icon: LineChart,
+    title: 'Rent Review Insights',
+    description:
+      'Stale-rent detection (12mo default) with suggested rent ranges from ONS Private Rental Index + curated local comparables. Confidence labels, RRA tribunal-risk warnings, snooze / dismiss / apply per row, full review history. Pro and above.',
   },
   {
     icon: TrendingUp,
@@ -106,6 +120,8 @@ const TRUST_POINTS = [
   { icon: Home, text: '30+ UK councils HMO licensing data' },
   { icon: Scale, text: 'Section 42 statutory workflow' },
   { icon: BarChart3, text: 'HMRC MTD-ready (sandbox)' },
+  { icon: Banknote, text: 'Open Banking auto-match (TrueLayer, AIS-only)' },
+  { icon: LineChart, text: 'Rent Review Insights with ONS index' },
   { icon: Bell, text: 'Renters\u2019 Rights Act 2025 \u2014 Wave 1 + 2 dispatch' },
   { icon: Lock, text: 'AES-256-GCM + GDPR + audit log' },
 ]
@@ -308,7 +324,7 @@ export default function HomePage() {
               { name: 'Free', price: '£0', limit: '3 props' },
               { name: 'Starter', price: '£14.99', limit: '10 props' },
               { name: 'Pro', price: '£29.99', limit: '25 props' },
-              { name: 'Business', price: '£59.99', limit: '50 props' },
+              { name: 'Business', price: '£49.99', limit: 'Unlimited' },
               { name: 'Portfolio', price: '£99.99', limit: 'Unlimited' },
             ].map((tier) => (
               <div key={tier.name} className="rounded-xl border border-border p-4">

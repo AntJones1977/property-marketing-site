@@ -25,6 +25,9 @@ import {
   Lock,
   Calendar,
   ClipboardCheck,
+  Banknote,
+  LineChart,
+  RefreshCw,
 } from 'lucide-react'
 import type { Metadata } from 'next'
 
@@ -57,11 +60,14 @@ const FEATURE_SECTIONS = [
         icon: Landmark,
         title: 'CT600 Company / SPV Returns',
         description:
-          'The only UK landlord tool with native Limited Company tax support. 12 company-specific expense categories, S455 director-loan tracking, ATED alerts, and Companies House deadlines.',
+          'The only UK landlord tool with native Limited Company tax support. 12 company-specific expense categories, capital allowances (AIA / WDA), S455 director-loan tracking, ATED alerts, and Companies House deadlines.',
         bullets: [
           'Mortgage interest full deduction (not Section 24 capped)',
+          'Company operating expenses — accountancy, insurance, life assurance, director remuneration, legal, subscriptions, utilities, travel',
+          'Capital allowances — AIA up to £1m, WDA 18% main pool / 6% special-rate, multi-period roll-forward',
           'Director salary, employer pension, S455 tracking',
           'ATED annual charge alerts',
+          'Companies House auto-fill — fetch CRN, registered address, ARD, SIC, directors',
           'Companies House filing deadline reminders',
           'Grouped by linked companyId (Reference Data)',
           'Auto-detects wrong ownership type with warning banner',
@@ -106,6 +112,40 @@ const FEATURE_SECTIONS = [
           '12 company-specific CT600 categories',
           'Import expenses from scanned receipts',
           'Monthly and annual summaries',
+        ],
+      },
+    ],
+  },
+  {
+    category: 'Banking & Reconciliation',
+    features: [
+      {
+        icon: Banknote,
+        title: 'Open Banking + Auto-match',
+        description:
+          'Link UK banks via TrueLayer (AIS-only — read-only access). Multi-bank from day one with encrypted tokens, idempotent sync, and a deterministic match-rule engine that turns transactions into RentPayment / Expense records.',
+        bullets: [
+          'TrueLayer (sandbox today; production via FCA TrueLayer Agent route)',
+          'Multi-bank: Pro = 2 connections, Business = unlimited',
+          'BankMatchRule scoring: surname / amount / recurring counterparty',
+          '≥0.85 auto-creates RentPayment / Expense; 0.6–0.85 goes to review queue',
+          'Daily Vercel cron (03:00 UTC), idempotent re-runs',
+          '90-day SCA consent banner — yellow at T-14, red at T-0',
+          'Bulk-accept review queue + rules admin UI',
+          'AES-256-GCM token encryption, Plaid + GoCardless BAD stubs ready',
+        ],
+      },
+      {
+        icon: RefreshCw,
+        title: 'Mid-year Ownership Transfers',
+        description:
+          'Atomic, reversible, audit-logged transfers between SINGLE / JOINT / COMPANY / MANAGED ownership types — split a tax year cleanly between SA105 and CT600 when a property moves to your SPV part-way through.',
+        bullets: [
+          'Pre-flight diff: shows 2024-25 SA105 totals before and after — refuses to commit if they would change',
+          'Atomic transfer route — closes one PropertyOwnership period and opens another',
+          'Reversal flow restores prior state with audit trail',
+          'Ownership history timeline on the property Overview tab',
+          'Time-aware tax filtering — records dated D belong to whichever return covered ownership at D',
         ],
       },
     ],
@@ -242,16 +282,20 @@ const FEATURE_SECTIONS = [
       },
       {
         icon: PenTool,
-        title: 'E-Signatures',
+        title: 'E-Signatures (incl. Joint AST)',
         description:
-          'Send tenancy agreements for legally binding digital signing via DocuSeal. Full lifecycle automated \u2014 from sending to storing the signed copy.',
+          'Send tenancy agreements for legally binding digital signing via DocuSeal. Full lifecycle automated \u2014 from sending to storing the signed copy. Joint ASTs supported as a single envelope with parallel multi-signer flow.',
         bullets: [
           'Send documents for signing in one click',
+          'Joint AST: one envelope, multiple submitters, parallel signing',
+          'Per-submitter status, targeted resend, decline-kills-envelope safety',
+          'Per-tenant portal slice \u2014 each joint tenant sees only their own row',
+          'Plan-gate counts once per envelope (a 2-tenant AST = 1 signature)',
           'Real-time signing status tracking',
           'Signed PDFs downloaded and stored automatically',
           'Tenant can sign from portal or email link',
           'Landlord email notification on completion',
-          'Compliance checklist auto-updates to Signed',
+          'Compliance checklist auto-updates to Signed (or "Partially signed (1/2)" mid-flight)',
           'Legally valid under UK eIDAS and Electronic Communications Act 2000',
         ],
       },
@@ -324,6 +368,21 @@ const FEATURE_SECTIONS = [
           'Surfaces equity-extraction opportunities',
           'Property-by-property change log',
           'Track progress against a growth target',
+        ],
+      },
+      {
+        icon: LineChart,
+        title: 'Rent Review Insights',
+        description:
+          'Detect properties where the rent agreement is stale (12 months default \u2014 configurable) and surface a defensible suggested rent range from ONS Private Rental Index uplift + curated local comparables. The growth lever no other UK landlord tool exposes.',
+        bullets: [
+          'ONS Private Rental Index daily auto-pull (regional MoM% compounded onto medians)',
+          'Confidence labels \u2014 HIGH (5+ comparables), MEDIUM (2+), LOW (index-only)',
+          'RRA tribunal-risk warning when suggested rent exceeds market median by > 10%',
+          'Apply updates Property.rentalIncome + Tenancy.rentAmount + writes review history',
+          'Snooze (configurable duration) / Dismiss / Restore per row',
+          'MANAGED properties: read-only badge, Apply suppressed',
+          'Strategic rent-review outlook tile on Growth Plan',
         ],
       },
       {
