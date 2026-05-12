@@ -47,11 +47,15 @@ const FEATURE_SECTIONS = [
         icon: BarChart3,
         title: 'SA105 Personal Tax Returns',
         description:
-          'Generate HMRC SA105-ready reports mapping your income and expenses to the correct Self Assessment boxes. Covers SINGLE and JOINT ownership types.',
+          'Generate HMRC SA105-ready reports mapping your income and expenses to the correct Self Assessment boxes. Covers SINGLE and JOINT ownership types. Lock the year for review and email a summary to your accountant in one click.',
         bullets: [
           'SA105 box references for all fields',
           'Per-property and portfolio-level breakdowns',
           'Joint-ownership split between owners',
+          'Mid-year transfer banner — suppressed for properties with personal months in the displayed year',
+          'Emerald Lock / amber Unlock buttons + locked-state banner',
+          'One-click "Email summary to accountant" with the PDF',
+          'Delete projected (custom rolled-forward) years',
           'P&L financial statements',
           'One-click PDF export for your accountant',
         ],
@@ -60,9 +64,16 @@ const FEATURE_SECTIONS = [
         icon: Landmark,
         title: 'CT600 Company / SPV Returns',
         description:
-          'The only UK landlord tool with native Limited Company tax support. 12 company-specific expense categories, capital allowances (AIA / WDA), S455 director-loan tracking, ATED alerts, and Companies House deadlines.',
+          'The only UK landlord tool with native Limited Company tax support. Records-first per-property running costs (capture a mid-year service-charge increase as two records and watch CT600 split it correctly), capital allowances (AIA / WDA), S455 director-loan tracking, ATED alerts, drift detection and tax-year lock.',
         bullets: [
           'Mortgage interest full deduction (not Section 24 capped)',
+          'Records-first running costs — every rate is a dated record, not a forward estimate',
+          'Mid-year rate-change split — service charge £200/mo until Sept then £250/mo from Oct = two records, CT600 splits the period correctly',
+          'Drift detection — amber banner per property × category when the property tile rate differs from the latest invoice, with one-click deep-link to fix',
+          'Per-property drill-down — rental income, mortgage, mgmt fee, service charge, ground rent, R&M, net income',
+          'Period selector + inline Edit on every expense and asset row; re-derives tax-year + AP-end on date change',
+          'Tax-year tabs auto-resolve the accounting period from the company ARD (completed → 5 Apr, in-progress → today, future → Projected badge)',
+          'Emerald Lock / amber Unlock + locked-state banner + "Email summary to accountant" link',
           'Company operating expenses — accountancy, insurance, life assurance, director remuneration, legal, subscriptions, utilities, travel',
           'Capital allowances — AIA up to £1m, WDA 18% main pool / 6% special-rate, multi-period roll-forward',
           'Director salary, employer pension, S455 tracking',
@@ -114,6 +125,19 @@ const FEATURE_SECTIONS = [
           'Monthly and annual summaries',
         ],
       },
+      {
+        icon: TrendingUp,
+        title: 'Capital Investments CRUD',
+        description:
+          'KV-backed Capital Investments register with ACTIVE / REPAID / WRITTEN_OFF status. Your live capital headline sums ACTIVE rows only — repaid and written-off positions sit as footnotes so the number reflects reality, not history.',
+        bullets: [
+          'Inline Add / Edit / Delete on the Growth Plan',
+          'Three states: ACTIVE / REPAID / WRITTEN_OFF',
+          'Headline shows sum of ACTIVE only',
+          'REPAID + WRITTEN_OFF surfaced as footnotes',
+          'Full audit log on every state change',
+        ],
+      },
     ],
   },
   {
@@ -123,12 +147,13 @@ const FEATURE_SECTIONS = [
         icon: Banknote,
         title: 'Open Banking + Auto-match',
         description:
-          'Link UK banks via TrueLayer (AIS-only — read-only access). Multi-bank from day one with encrypted tokens, idempotent sync, and a deterministic match-rule engine that turns transactions into RentPayment / Expense records.',
+          'Link UK banks via TrueLayer (AIS-only — read-only access). Multi-bank from day one with encrypted tokens, idempotent sync, a deterministic match-rule engine that turns transactions into RentPayment / Expense records, and a locked-year retro-match guard that protects sealed returns.',
         bullets: [
           'TrueLayer (sandbox today; production via FCA TrueLayer Agent route)',
           'Multi-bank: Pro = 2 connections, Business = unlimited',
           'BankMatchRule scoring: surname / amount / recurring counterparty',
           '≥0.85 auto-creates RentPayment / Expense; 0.6–0.85 goes to review queue',
+          'Locked-year retro-match guard — once a tax year is locked, the daily cron and manual-match drawer both refuse to retro-match into it',
           'Daily Vercel cron (03:00 UTC), idempotent re-runs',
           '90-day SCA consent banner — yellow at T-14, red at T-0',
           'Bulk-accept review queue + rules admin UI',
@@ -170,7 +195,7 @@ const FEATURE_SECTIONS = [
         icon: AlertTriangle,
         title: 'Renters\u2019 Rights Act 2025 \u2014 Wave 1 + 2',
         description:
-          'End-to-end RRA compliance built before the 1 May 2026 commencement. Bulk Information Sheet dispatch with delivery + open evidence, plus the periodic-tenancy audit, Section 21 wind-down register, and Statement of Tenancy Terms dispatch. Competitors treat this as a blog post; we treat it as a product surface.',
+          'End-to-end RRA compliance built before the 1 May 2026 commencement. Bulk Information Sheet dispatch with delivery + open evidence, plus the periodic-tenancy audit, Section 21 wind-down register, and Statement of Tenancy Terms with auto-resend on rent / deposit / lease edits. Competitors treat this as a blog post; we treat it as a product surface.',
         bullets: [
           'Wave 1 \u2014 bulk Info Sheet dispatch via Resend with delivery + open webhooks',
           'Postal-pack PDF fallback (per-tenant cover letter + Info Sheet)',
@@ -179,8 +204,25 @@ const FEATURE_SECTIONS = [
           'Wave 2 \u2014 periodic-tenancy audit + "Mark as periodic" action',
           'Wave 2 \u2014 Section 21 wind-down register with permanent ABOLISHED banner',
           'Wave 2 \u2014 Statement of Tenancy Terms PDF dispatch',
+          'Auto-resend badge \u2014 change the rent / deposit / lease type and the SoTT surface flags "Re-send needed", sticky until acknowledged',
           'Dashboard countdown, escalating from info \u2192 warning \u2192 danger',
           'MANAGED properties included (penalty applies regardless of tax treatment)',
+        ],
+      },
+      {
+        icon: RefreshCw,
+        title: 'Form 4A \u2014 Section 13(2) Statutory Rent-Increase Workflow',
+        description:
+          'The end-to-end statutory rent-review workflow no competitor has shipped. Propose, sign, accept, renew \u2014 and watch the new rent propagate to every tax and tenant surface in one move.',
+        bullets: [
+          'Propose new rent + effective date; system renders docx prefilled',
+          'DocuSeal landlord pre-sign with one click',
+          'Tenant auto-emailed signed Form 4A + one-click portal sign-in link',
+          'Portal Accept / Decline / Refer-to-Tribunal buttons',
+          'On Accept \u2014 renewal Tenancy Agreement auto-drafted with new rent + effective date',
+          'Landlord sends renewal AST; parallel multi-signer flow; COMPLETED state opens a new TenancyPeriod',
+          'SA105, CT600, MTD, property tile and tenant portal all re-render with the new rent',
+          'Full audit trail across every step',
         ],
       },
     ],
@@ -273,10 +315,11 @@ const FEATURE_SECTIONS = [
         icon: Shield,
         title: 'Compliance Tracking',
         description:
-          'Stay on top of mandatory safety certificates. The system alerts you when Gas Safety, EICR, or EPC certificates are expiring across the portfolio. Per-property "all-electric" gating skips Gas Safety entirely on properties with no gas appliances.',
+          'Stay on top of mandatory safety certificates. The system alerts you when Gas Safety, EICR, or EPC certificates are expiring across the portfolio. Per-property "all-electric" gating skips Gas Safety entirely on properties with no gas appliances. Per-surface portfolio scope means alerts pick up a property you bought yesterday before you have set the rent — statutory certs are a pre-tenancy duty.',
         bullets: [
           'Gas Safety, EICR, EPC, PAT, legionella',
           'Per-property hasGasAppliances flag — "Electric only" properties skip CP12 everywhere',
+          'Per-surface portfolio scope — compliance alerts include pre-tenancy properties (tax surfaces exclude them)',
           'Dashboard alerts for upcoming and overdue renewals',
           'Document storage with expiry dates',
           'Per-property compliance status',
@@ -286,22 +329,24 @@ const FEATURE_SECTIONS = [
         icon: FileCheck,
         title: 'Document Management',
         description:
-          'Upload and organise all property documents: tenancy agreements, certificates, land registry titles, leases, and more.',
+          'Upload and organise all property documents: tenancy agreements, certificates, land registry titles, leases, and more. Big files (EICRs over 4.5MB, scanned bundles) upload client-direct to blob storage so they never hit a body-size limit.',
         bullets: [
           '11 document types supported',
           'Secure cloud storage (Vercel Blob)',
+          'Big-file uploads >4.5MB — client-direct to blob, no proxy limit',
           'Signed document download via secure URLs',
           'Per-property document organisation',
         ],
       },
       {
         icon: PenTool,
-        title: 'E-Signatures (incl. Joint AST)',
+        title: 'E-Signatures (incl. Joint AST + Landlord Countersign)',
         description:
-          'Send tenancy agreements for legally binding digital signing via DocuSeal. Full lifecycle automated \u2014 from sending to storing the signed copy. Joint ASTs supported as a single envelope with parallel multi-signer flow.',
+          'Send tenancy agreements for legally binding digital signing via DocuSeal. Joint ASTs run as a single envelope with up to 4 tenants + 1 landlord countersigner, parallel signing, and exactly-once post-sign automation.',
         bullets: [
           'Send documents for signing in one click',
-          'Joint AST: one envelope, multiple submitters, parallel signing',
+          'Joint AST: one envelope, up to 4 tenants + 1 landlord countersigner, parallel signing',
+          'Exactly-once post-sign automation (no duplicate state on webhook replay)',
           'Per-submitter status, targeted resend, decline-kills-envelope safety',
           'Per-tenant portal slice \u2014 each joint tenant sees only their own row',
           'Plan-gate counts once per envelope (a 2-tenant AST = 1 signature)',
@@ -313,6 +358,19 @@ const FEATURE_SECTIONS = [
           'Legally valid under UK eIDAS and Electronic Communications Act 2000',
         ],
       },
+      {
+        icon: ClipboardCheck,
+        title: 'AST Landlord-Sign Drift Reconciliation',
+        description:
+          'Tenancy snapshots get prefilled at send time. On landlord-sign we cross-check the snapshot against the current Tenancy and Property records, force Property.rentalIncome to match Tenancy.rentAmount, and surface field-by-field diffs (rent, deposit, dates, contacts, address) so what got signed is what is on file.',
+        bullets: [
+          'Snapshot-at-send-time prefill (no last-minute surprises)',
+          'On-sign cross-check against current Tenancy + Property',
+          'Force-aligns Property.rentalIncome \u2190 Tenancy.rentAmount via canonical writer',
+          'Field-by-field diff banner \u2014 rent, deposit, dates, contacts, address',
+          'Audit-logged at every step',
+        ],
+      },
     ],
   },
   {
@@ -322,11 +380,13 @@ const FEATURE_SECTIONS = [
         icon: Users,
         title: 'Tenant Portal',
         description:
-          'Give your tenants a self-service portal where they can view their documents, submit maintenance requests, and communicate with you. Includes the RRA Information Sheet acknowledgement banner and per-tenant joint-AST signing slice.',
+          'Give your tenants a self-service portal where they can view their documents, submit maintenance requests, and communicate with you. Every tenant email — Form 4A, RRA Info Sheet, Statement of Tenancy Terms — includes a one-click portal sign-in deep-link, so tenants land in the right place without hunting through inboxes.',
         bullets: [
           'Separate tenant login with secure access',
+          'Portal sign-in deep-link in every tenant email (Form 4A, RRA Info Sheet, SoTT)',
           'View tenancy documents and signed agreements',
           'RRA 2025 Information Sheet banner — "I have read this" → ACKNOWLEDGED',
+          'Form 4A — Accept / Decline / Refer-to-Tribunal buttons in-portal',
           'Joint-AST per-tenant slice — each named adult sees only their own row',
           'Submit and track maintenance requests',
           'GDPR consent management',
@@ -360,12 +420,29 @@ const FEATURE_SECTIONS = [
         icon: Wrench,
         title: 'Maintenance Requests',
         description:
-          'Tenants can submit maintenance requests through the portal. Track status, assign contractors, and log costs.',
+          'Tenants can submit maintenance requests through the portal. A back-datable workDate and cost field means a Resolved request auto-creates an Expense in the right HMRC SA105 category for the right tax year — labour + materials rolled up in one place.',
         bullets: [
-          'Tenant-initiated requests',
-          'Status tracking (Open, In Progress, Completed)',
+          'Tenant-initiated and landlord-initiated requests',
+          'Status tracking (Open, In Progress, Resolved, Closed)',
           'Contractor assignment',
-          'Cost logging feeds into expenses',
+          'Back-datable workDate — splits cost into the correct tax year',
+          'Resolved + cost > 0 auto-creates an Expense via the canonical writer',
+          'Attach materials receipts to the request; "Materials £X · Labour £Y · Total £Z" rollup',
+          'Auto-merges into SA105 PropertyCard via dedup helper',
+          '"All" tab sort: Priority (OPEN → IN_PROGRESS → RESOLVED → CLOSED), then createdAt desc',
+        ],
+      },
+      {
+        icon: UserCheck,
+        title: 'Admin Tenant Impersonation',
+        description:
+          'Click "Impersonate" on any tenant row and land on the portal as that tenant — see exactly what they see when testing a Form 4A flow, a Joint AST signing slice, or an RRA Info Sheet banner. Your admin session stays intact; a red banner reminds you until you stop. Audit-logged.',
+        bullets: [
+          'One-click Impersonate from the tenant row',
+          'Fresh tenant session — admin property_session cookie preserved',
+          'Persistent red banner until you click Stop Impersonating',
+          'Full audit trail of every impersonation',
+          'No juggling test accounts to verify the tenant experience',
         ],
       },
     ],
@@ -405,9 +482,11 @@ const FEATURE_SECTIONS = [
         icon: Database,
         title: 'Reference Data Architecture',
         description:
-          'Centralised, pick-once-reuse-everywhere library for companies, solicitors, mortgage brokers, and standard fees. Maintain each entity in one place \u2014 every property that links to it updates automatically.',
+          'Centralised, pick-once-reuse-everywhere library for limited companies, solicitors, mortgage brokers, standard fees and landlords. Maintain each entity in one place \u2014 every property that links to it updates automatically, and every signing template prefills landlord details from the reference record.',
         bullets: [
+          'Five entity types: Limited Companies, Solicitors, Mortgage Brokers, Standard Fees, Landlords',
           'Limited Companies: CRN, UTR, year-end, directors, SIC, ATED',
+          'Landlords \u2014 per-property assignment with signing-template prefill',
           'Solicitors and Mortgage Brokers with contact details',
           'Standard Fees library (survey, legal, mortgage, etc.)',
           'Link properties to companies for CT600 grouping',
@@ -433,7 +512,7 @@ const FEATURE_SECTIONS = [
         icon: Building2,
         title: 'Property Portfolio Dashboard',
         description:
-          'A complete overview at a glance. Track total value, equity, monthly income, profit, and yields across all properties \u2014 personal, joint, company and managed.',
+          'A complete overview at a glance. Track total value, equity, monthly income, profit, and yields across all properties \u2014 personal, joint, company and managed. Property lifecycle handled in two distinct flows: Delete (full Prisma + KV cascade for incomplete purchases) or Archive (preserves history for sold properties so historic returns still resolve).',
         bullets: [
           'Auto-calculated net profit, yields, and LTV ratios',
           'Property status (Active, Buying, Selling, Issue)',
@@ -441,6 +520,7 @@ const FEATURE_SECTIONS = [
           'Portfolio summary PDF export',
           'Four ownership types \u2014 SINGLE, JOINT, COMPANY, MANAGED',
           'MANAGED properties shown operationally but excluded from every tax surface',
+          'Delete vs Archive \u2014 two lifecycles. Delete cleans everything for properties that never completed; Archive preserves history for sold properties',
         ],
       },
     ],
@@ -474,15 +554,19 @@ const FEATURE_SECTIONS = [
       },
       {
         icon: Lock,
-        title: 'Audit Log, GDPR & Self-Host',
+        title: 'Audit Log, GDPR, Multi-User & Self-Host',
         description:
-          'Privacy, security and compliance built in \u2014 important for landlords handling tenant data under DPA / UK GDPR obligations.',
+          'Privacy, security and compliance built in \u2014 important for landlords handling tenant data under DPA / UK GDPR obligations. Plan-tier feature gating, an Owner role and multi-user invites with full invite audit. 2,756 regression tests across 212 suites keep cascade-locked contracts pinned at build time.',
         bullets: [
           'AES-256-GCM encryption at rest',
           'Per-account isolated database',
           'Full audit log for every state change',
+          'Multi-user with Owner role + invite audit (Starter: up to 3; Pro+: unlimited)',
+          'Super-user role bypasses plan gates for admin / Owner accounts',
+          'Plan-tier feature gating with one-click upgrade prompts',
           'GDPR data export and erasure',
           'Self-hosted deployment option (Portfolio / Agent tier)',
+          '2,756 regression tests across 212 suites \u2014 cascade-locked contract tests fail the build if a route bypasses the canonical writer',
           'Pre-push build validation on every release',
         ],
       },
