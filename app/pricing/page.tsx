@@ -7,7 +7,7 @@ const APP_URL = 'https://property-app-pi-fawn.vercel.app'
 export const metadata: Metadata = {
   title: 'Pricing — PropertyApp',
   description:
-    'Transparent pricing for UK landlords. Free for 3 properties, Starter £14.99, Pro £29.99, Business £49.99 (unlimited properties), Portfolio / Agent £99.99 (self-hosted). CT600, HMO compliance, Section 42 and MTD included.',
+    'Transparent pricing for UK landlords. Free for 3 properties, Starter £14.99, Pro £29.99, Business £49.99 (unlimited properties), Portfolio / Agent £99.99 (self-hosted). CT600 with drift detection + tax-year lock, Form 4A statutory rent reviews, HMO compliance, Section 42 and MTD included.',
 }
 
 const TIERS = [
@@ -62,6 +62,8 @@ const TIERS = [
       { label: 'Renters\u2019 Rights Act 2025 Info Sheet', included: true },
       { label: 'AI receipt scanning', included: true, note: '30/mo' },
       { label: 'SA105 tax report + PDF export', included: true },
+      { label: 'SA105 lock-for-review + email summary to accountant', included: true },
+      { label: 'Property Archive lifecycle (preserves history for sold properties)', included: true },
       { label: 'Reference Data (full)', included: true },
       { label: 'Audit log + GDPR export', included: true },
       { label: 'E-signatures', included: true, note: '5/mo' },
@@ -91,20 +93,29 @@ const TIERS = [
     features: [
       { label: 'Everything in Starter', included: true },
       { label: 'AI receipt scanning', included: true, note: '100/mo' },
-      { label: 'E-signatures (incl. Joint AST)', included: true, note: '20/mo' },
+      { label: 'E-signatures (incl. Joint AST + landlord countersign)', included: true, note: '20/mo' },
       { label: 'MTD quarterly submissions', included: true, note: 'Unlimited' },
-      { label: 'Open Banking auto-match', included: true, note: '2 banks' },
+      { label: 'Open Banking auto-match (with locked-year retro-match guard)', included: true, note: '2 banks' },
       { label: 'Tenant referencing workflow', included: true, note: '£35/report' },
       { label: 'CT600 company / SPV returns', included: true },
+      { label: 'CT600 records-first + mid-year rate split + per-property drill-down', included: true },
+      { label: 'CT600 drift detection + tax-year lock + accountant email', included: true },
       { label: 'CT600 capital allowances (AIA + WDA)', included: true },
       { label: 'S455 director loan tracking + ATED alerts', included: true },
       { label: 'Companies House auto-fill', included: true },
       { label: 'Section 42 leasehold extension tracker', included: true },
+      { label: 'Form 4A statutory rent-increase workflow (end-to-end)', included: true },
+      { label: 'Statement of Tenancy Terms auto-resend on rent / deposit / lease edits', included: true },
+      { label: 'AST landlord-sign drift reconciliation', included: true },
       { label: 'Rent Review Insights (ONS-driven)', included: true },
+      { label: 'Capital Investments CRUD (ACTIVE / REPAID / WRITTEN_OFF)', included: true },
+      { label: 'Maintenance → Expense → SA105 auto-wiring + labour/materials rollup', included: true },
+      { label: 'Admin tenant impersonation', included: true },
       { label: 'Mid-year ownership transfers', included: true },
       { label: 'Growth Plan snapshot changelog', included: true },
       { label: 'Article 4 postcode auto-check', included: true },
       { label: 'Compliance calendar + auto-tasks', included: true },
+      { label: 'Big-file uploads >4.5MB', included: true },
       { label: 'Multiple users', included: true, note: 'Unlimited' },
       { label: 'HMO compliance module', included: true, note: '1 HMO' },
       { label: 'Self-hosted deployment', included: false },
@@ -121,7 +132,7 @@ const TIERS = [
       { label: 'Everything in Pro', included: true },
       { label: 'Unlimited properties', included: true },
       { label: 'AI receipt scanning', included: true, note: 'Unlimited' },
-      { label: 'E-signatures (incl. Joint AST)', included: true, note: 'Unlimited' },
+      { label: 'E-signatures (incl. Joint AST + landlord countersign)', included: true, note: 'Unlimited' },
       { label: 'Open Banking auto-match', included: true, note: 'Unlimited banks' },
       { label: 'HMO compliance module', included: true, note: 'Unlimited HMOs' },
       { label: 'Statutory room-size checker', included: true },
@@ -131,6 +142,9 @@ const TIERS = [
       { label: 'ASB log → Section 8 Ground 14 evidence pack', included: true },
       { label: 'Fit & Proper Person register', included: true },
       { label: 'Portfolio compliance matrix', included: true },
+      { label: 'Per-surface portfolio scope (pre-tenancy compliance, post-tenancy tax)', included: true },
+      { label: 'Landlord Reference Data + per-property assignment + signing prefill', included: true },
+      { label: 'Property Delete (full Prisma + KV cascade for incomplete purchases)', included: true },
       { label: 'Companies House deadline reminders', included: true },
       { label: 'Priority email support', included: true },
       { label: 'Self-hosted deployment', included: false },
@@ -140,7 +154,7 @@ const TIERS = [
     name: 'Portfolio / Agent',
     price: '£99.99',
     period: 'month',
-    description: 'For letting agents, multi-client operators, and DPA-sensitive setups requiring self-hosted deployment.',
+    description: 'For letting agents, multi-client operators, and DPA-sensitive setups requiring self-hosted deployment, Owner-role governance and full invite audit.',
     propertyLimit: 'Unlimited properties',
     cta: 'Start Free Trial',
     features: [
@@ -148,6 +162,8 @@ const TIERS = [
       { label: 'Unlimited properties & HMOs', included: true },
       { label: 'Multi-client / multi-company grouping', included: true },
       { label: 'Self-hosted deployment option', included: true },
+      { label: 'Owner role + multi-user invite audit', included: true },
+      { label: 'Super-user role bypasses plan gates for Owner accounts', included: true },
       { label: 'Dedicated onboarding', included: true },
       { label: 'SLA-backed support', included: true },
       { label: 'Extended audit log retention', included: true },
@@ -187,7 +203,7 @@ const FAQ = [
   },
   {
     q: 'How does Open Banking auto-match work?',
-    a: 'Pro and above link UK banks via TrueLayer (AIS-only — read-only access). A daily cron syncs transactions; a deterministic match-rule engine scores each one (surname / amount / recurring counterparty) and auto-creates RentPayment / Expense records at ≥0.85 confidence, drops ambiguous ones into a review queue, and leaves the rest UNMATCHED for manual triage. 90-day SCA consent renewal banner included. Pro = 2 banks, Business = unlimited. Sandbox today; production via the FCA TrueLayer Agent route.',
+    a: 'Pro and above link UK banks via TrueLayer (AIS-only — read-only access). A daily cron syncs transactions; a deterministic match-rule engine scores each one (surname / amount / recurring counterparty) and auto-creates RentPayment / Expense records at ≥0.85 confidence, drops ambiguous ones into a review queue, and leaves the rest UNMATCHED for manual triage. A locked-year retro-match guard protects sealed returns — once a tax year is locked, neither the daily cron nor the manual-match drawer will retro-match into it. 90-day SCA consent renewal banner included. Pro = 2 banks, Business = unlimited. Sandbox today; production via the FCA TrueLayer Agent route.',
   },
   {
     q: 'What are Rent Review Insights?',
@@ -195,11 +211,27 @@ const FAQ = [
   },
   {
     q: 'Can I send a Joint AST to multiple tenants?',
-    a: 'Yes — Pro and above. A joint AST is a single DocuSeal envelope with multiple submitters and parallel signing (no signer blocks the others). Each tenant gets their own portal slice and email link; per-submitter status is tracked; targeted resend works per row; a single decline kills the envelope. Plan-gate counts once per envelope (a 2-tenant AST = 1 signature against your monthly limit).',
+    a: 'Yes — Pro and above. A joint AST is a single DocuSeal envelope with up to 4 tenants + 1 landlord countersigner and parallel signing (no signer blocks the others). Each tenant gets their own portal slice and email link; per-submitter status is tracked; targeted resend works per row; a single decline kills the envelope; post-sign automation is exactly-once. Plan-gate counts once per envelope (a 2-tenant AST = 1 signature against your monthly limit).',
   },
   {
     q: 'How does tenant referencing work?',
     a: 'Starter and above can order a tenant reference through our pluggable referencing layer with GDPR consent capture, secure document storage, and a per-applicant decision workflow. Reports are pay-per-use at a £35 default (per-request override available). Partner integrations with reference bureaux and the Rogue Landlord Database are on the roadmap.',
+  },
+  {
+    q: 'What is Form 4A and how does the rent-review workflow work?',
+    a: 'Form 4A is the statutory Section 13(2) notice for proposing a rent increase. PropertyApp ships the only end-to-end Form 4A workflow on the UK market: propose new rent + effective date, the system renders a prefilled docx, you pre-sign in DocuSeal, the tenant is auto-emailed the signed Form 4A with a one-click portal sign-in link, and they Accept / Decline / Refer-to-Tribunal in the portal. On Accept, the renewal Tenancy Agreement is auto-drafted with the new rent, all parties sign, and on COMPLETED a new TenancyPeriod opens — SA105, CT600, MTD and the property tile all re-render with the new rent. Pro and above.',
+  },
+  {
+    q: 'What is CT600 drift detection?',
+    a: 'CT600 is records-first — every running cost (mortgage interest, management fee, service charge, ground rent, R&M) is a dated record, not a forward-estimated column. When the rate you have on the property tile drifts from the latest invoice you recorded, an amber banner appears per property × category with a one-click deep-link to the property Edit panel. Float-noise-safe via integer-pence comparison. Pro and above.',
+  },
+  {
+    q: 'Can I lock a tax year and share with my accountant?',
+    a: 'Yes — Starter ships SA105 lock-for-review, Pro adds CT600. Hit the emerald Lock button on the year selector to seal the period; a locked-state banner appears, the daily bank-feed cron and manual-match drawer both refuse to retro-match into the locked period, and a one-click "Email summary to accountant" goes out alongside the PDF. Amber Unlock reverses it (audit-logged).',
+  },
+  {
+    q: 'What happens if I change the rent after a tenancy starts?',
+    a: 'Pro and above: when tenancy financial state changes (rent edit, deposit change, lease-type flip, contact list change), a new TenancyPeriod opens automatically and the Statement of Tenancy Terms surface derives a "Re-send needed" badge — sticky until the tenant acknowledges the updated SoTT in-portal. This is RRA compliance you can’t forget. For Section 13(2) statutory rent reviews, use Form 4A instead — the new rent flows through the full workflow.',
   },
   {
     q: 'Is my data secure?',

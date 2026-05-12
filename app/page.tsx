@@ -22,6 +22,9 @@ import {
   UserCheck,
   Banknote,
   LineChart,
+  RefreshCw,
+  FileCheck,
+  Wrench,
 } from 'lucide-react'
 import Link from 'next/link'
 import { FeatureCard } from '@/components/feature-card'
@@ -33,7 +36,13 @@ const FEATURES = [
     icon: Landmark,
     title: 'SA105 + CT600 Under One Roof',
     description:
-      'The only UK landlord tool that covers both Personal (SA105) and Limited Company (CT600) tax returns, including S455 director loans, ATED alerts, and Companies House deadlines.',
+      'The only UK landlord tool that covers both Personal (SA105) and Limited Company (CT600) returns. Records-first per-property running costs, mid-year rate-change splits, per-property drill-down, S455 director loans, ATED alerts, and Companies House deadlines.',
+  },
+  {
+    icon: RefreshCw,
+    title: 'Form 4A Statutory Rent Review',
+    description:
+      'End-to-end Section 13(2) workflow: propose new rent, landlord pre-signs in DocuSeal, tenant Accepts / Declines / Refers to tribunal from the portal, the renewal AST auto-drafts on Accept, and the new rent propagates to SA105, CT600, MTD and the property tile. Nobody else ships this.',
   },
   {
     icon: Home,
@@ -51,7 +60,7 @@ const FEATURES = [
     icon: Shield,
     title: 'Renters\u2019 Rights Act 2025 \u2014 Wave 1 + 2 ready',
     description:
-      'Bulk Information Sheet dispatch with delivery + open evidence, postal-pack fallback, tenant acknowledgement, and a per-tenant evidence pack for the \u00a37,000-per-tenancy penalty defence. Plus periodic-tenancy audit, Section 21 wind-down register, and Statement of Tenancy Terms dispatch \u2014 live before the 1 May 2026 commencement.',
+      'Bulk Information Sheet dispatch with delivery + open evidence, postal-pack fallback, tenant acknowledgement, and a per-tenant evidence pack for the \u00a37,000-per-tenancy penalty defence. Plus periodic-tenancy audit, Section 21 wind-down register, and Statement of Tenancy Terms with auto-resend on rent / deposit / lease edits.',
   },
   {
     icon: FileSpreadsheet,
@@ -60,16 +69,28 @@ const FEATURES = [
       'Quarterly SA105 submissions direct to HMRC via Government Gateway. Pre-submission integrity checks, fraud prevention headers, Final Declaration workflow, and full audit trail.',
   },
   {
+    icon: FileCheck,
+    title: 'Tax-Year Lock + Accountant Share',
+    description:
+      'Emerald Lock / amber Unlock on SA105 and CT600. Once locked, the daily bank-feed cron and the manual-match drawer refuse retro-matches into the period, and a one-click "Email summary to accountant" link goes out alongside the PDF.',
+  },
+  {
     icon: Banknote,
     title: 'Open Banking + Auto-match',
     description:
-      'Link UK banks via TrueLayer (AIS-only). Match-rule engine scores every transaction, auto-creates RentPayment / Expense at ≥0.85, drops the rest into a review queue. Daily cron + 90-day SCA consent banner. Pro = 2 banks, Business = unlimited.',
+      'Link UK banks via TrueLayer (AIS-only). Match-rule engine scores every transaction, auto-creates RentPayment / Expense at ≥0.85, drops the rest into a review queue. Locked-year retro-match guard, daily cron and 90-day SCA consent banner. Pro = 2 banks, Business = unlimited.',
   },
   {
     icon: LineChart,
     title: 'Rent Review Insights',
     description:
       'Stale-rent detection (12mo default) with suggested rent ranges from ONS Private Rental Index + curated local comparables. Confidence labels, RRA tribunal-risk warnings, snooze / dismiss / apply per row, full review history. Pro and above.',
+  },
+  {
+    icon: Wrench,
+    title: 'Maintenance → Tax Wiring',
+    description:
+      'A Resolved maintenance request with a cost auto-creates an Expense in the right HMRC SA105 category for the right tax year. Attach receipts and a "Materials £X · Labour £Y · Total £Z" rollup feeds straight into your return.',
   },
   {
     icon: TrendingUp,
@@ -81,7 +102,7 @@ const FEATURES = [
     icon: Database,
     title: 'Reference Data Architecture',
     description:
-      'Pick-once-reuse-everywhere library for Limited Companies, Solicitors, Mortgage Brokers, and Standard Fees. Manage CRN, UTR, year-end, directors, SIC code, and ATED status in one place.',
+      'Pick-once-reuse-everywhere library for Limited Companies, Solicitors, Mortgage Brokers, Standard Fees and Landlords. Manage CRN, UTR, year-end, directors, SIC code, and ATED status in one place.',
   },
   {
     icon: UserCheck,
@@ -97,15 +118,15 @@ const FEATURES = [
   },
   {
     icon: PenTool,
-    title: 'E-Signatures',
+    title: 'E-Signatures (incl. Joint AST)',
     description:
-      'Send tenancy agreements for legally binding digital signing via DocuSeal. Automated lifecycle from send to signed-copy storage. Valid under UK eIDAS.',
+      'Send tenancy agreements for legally binding digital signing via DocuSeal. Joint AST as one envelope with up to 4 tenants + 1 landlord countersigner, parallel signing, exactly-once post-sign automation, and landlord-sign drift reconciliation. Valid under UK eIDAS.',
   },
   {
     icon: Users,
     title: 'Tenant Portal',
     description:
-      'Self-service portal for tenants to view documents, submit maintenance requests, and communicate with you. Included on every tier including Free.',
+      'Self-service portal for tenants to view documents, submit maintenance requests, and communicate with you. Every tenant email includes a one-click sign-in deep-link. Included on every tier, including Free.',
   },
   {
     icon: Lock,
@@ -117,6 +138,7 @@ const FEATURES = [
 
 const TRUST_POINTS = [
   { icon: Landmark, text: 'Personal + Company (SA105 + CT600)' },
+  { icon: RefreshCw, text: 'Form 4A statutory rent-review workflow' },
   { icon: Home, text: '30+ UK councils HMO licensing data' },
   { icon: Scale, text: 'Section 42 statutory workflow' },
   { icon: BarChart3, text: 'HMRC MTD-ready (sandbox)' },
@@ -124,6 +146,7 @@ const TRUST_POINTS = [
   { icon: LineChart, text: 'Rent Review Insights with ONS index' },
   { icon: Bell, text: 'Renters\u2019 Rights Act 2025 \u2014 Wave 1 + 2 dispatch' },
   { icon: Lock, text: 'AES-256-GCM + GDPR + audit log' },
+  { icon: Zap, text: '2,756 regression tests across 212 suites' },
 ]
 
 export default function HomePage() {
@@ -144,8 +167,8 @@ export default function HomePage() {
 
           <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             The only UK landlord software that covers SA105 and CT600, Section 42 leasehold extensions,
-            Renters&rsquo; Rights Act 2025, and end-to-end HMO compliance. Built for landlords running
-            personal, joint and SPV portfolios.
+            Renters&rsquo; Rights Act 2025, Form 4A statutory rent reviews, and end-to-end HMO compliance.
+            Built for landlords running personal, joint and SPV portfolios.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
@@ -302,7 +325,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {TRUST_POINTS.map((point) => (
               <div key={point.text} className="flex items-center gap-3 p-4 rounded-xl border border-border bg-background">
                 <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
