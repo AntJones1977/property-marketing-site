@@ -60,6 +60,8 @@ export async function POST(request: Request) {
   }
 
   const resend = new Resend(apiKey)
+
+  // 1. Notify the business inbox. This one must succeed.
   const { error } = await resend.emails.send({
     from: FROM_EMAIL,
     to: TO_EMAIL,
@@ -79,6 +81,42 @@ export async function POST(request: Request) {
       { ok: false, error: 'Could not send your message right now. Please try again shortly.' },
       { status: 502 },
     )
+  }
+
+  // 2. Auto-acknowledge the enquirer. Best-effort — never fail the request
+  // just because the confirmation copy didn't go out.
+  try {
+    const { error: ackError } = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: email,
+      replyTo: TO_EMAIL,
+      subject: 'Thanks — we’ve received your message',
+      text: `Hi ${name},
+
+Thanks for getting in touch with PropertyApp. We’ve received your message and a member of our team will get back to you within one business day.
+
+For your records, here’s what you sent:
+
+Subject: ${subject}
+
+${message}
+
+Best regards,
+The PropertyApp team
+MAR Property Investments Ltd`,
+      html: `<p>Hi ${escapeHtml(name)},</p>
+<p>Thanks for getting in touch with PropertyApp. We&rsquo;ve received your message and a member of our team will get back to you within one business day.</p>
+<p>For your records, here&rsquo;s what you sent:</p>
+<p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
+<p style="white-space:pre-wrap">${escapeHtml(message)}</p>
+<hr />
+<p>Best regards,<br />The PropertyApp team<br />MAR Property Investments Ltd</p>`,
+    })
+    if (ackError) {
+      console.error('Contact form: acknowledgement email failed.', ackError)
+    }
+  } catch (err) {
+    console.error('Contact form: acknowledgement email threw.', err)
   }
 
   return NextResponse.json({ ok: true })
