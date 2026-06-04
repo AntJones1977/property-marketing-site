@@ -7,7 +7,7 @@ const APP_URL = 'https://property-app-pi-fawn.vercel.app'
 export const metadata: Metadata = {
   title: 'Pricing — PropertyApp',
   description:
-    'Transparent pricing for UK landlords. Free for 3 properties, Starter £14.99, Pro £29.99, Business £49.99 (unlimited properties), Portfolio / Agent £99.99 (self-hosted). CT600 with drift detection + tax-year lock, Form 4A statutory rent reviews, HMO compliance, Section 42 and MTD included.',
+    'Transparent pricing for UK landlords. Free for 3 properties, Starter £14.99, Pro £29.99, Business £49.99 (unlimited properties), Portfolio / Agent £99.99 (self-hosted). CT600 with drift detection + tax-year lock, SA900/SA903 estate & trust returns, a per-return filing tracker, Form 4A statutory rent reviews, HMO compliance, Section 42 and MTD included.',
 }
 
 const TIERS = [
@@ -35,6 +35,8 @@ const TIERS = [
       { label: 'Open Banking auto-match', included: false },
       { label: 'Tenant referencing workflow', included: false },
       { label: 'CT600 company returns', included: false },
+      { label: 'SA900/SA903 estate & trust returns', included: false },
+      { label: 'Tax-return filing tracker', included: false },
       { label: 'CT600 capital allowances (AIA + WDA)', included: false },
       { label: 'Companies House auto-fill', included: false },
       { label: 'Section 42 leasehold tracker', included: false },
@@ -72,6 +74,8 @@ const TIERS = [
       { label: 'Multiple users', included: true, note: 'Up to 3' },
       { label: 'Open Banking auto-match', included: false },
       { label: 'CT600 company returns', included: false },
+      { label: 'SA900/SA903 estate & trust returns', included: false },
+      { label: 'Tax-return filing tracker', included: false },
       { label: 'CT600 capital allowances (AIA + WDA)', included: false },
       { label: 'Companies House auto-fill', included: false },
       { label: 'Section 42 leasehold tracker', included: false },
@@ -103,9 +107,11 @@ const TIERS = [
       { label: 'CT600 capital allowances (AIA + WDA)', included: true },
       { label: 'S455 director loan tracking + ATED alerts', included: true },
       { label: 'Companies House auto-fill', included: true },
+      { label: 'Tax-return filing tracker (SA105 + CT600) — Confirmed → Submitted → Accepted + deadline nag', included: true },
       { label: 'Section 42 leasehold extension tracker', included: true },
       { label: 'Form 4A statutory rent-increase workflow (end-to-end)', included: true },
       { label: 'Statement of Tenancy Terms auto-resend on rent / deposit / lease edits', included: true },
+      { label: 'Time-based tenancy history (rent / deposit periods)', included: true },
       { label: 'AST landlord-sign drift reconciliation', included: true },
       { label: 'Rent Review Insights (ONS-driven)', included: true },
       { label: 'Capital Investments CRUD (ACTIVE / REPAID / WRITTEN_OFF)', included: true },
@@ -131,6 +137,13 @@ const TIERS = [
     features: [
       { label: 'Everything in Pro', included: true },
       { label: 'Unlimited properties', included: true },
+      { label: 'Trust & Estate (ESTATE / TRUST) ownership type', included: true },
+      { label: 'SA900 / SA903 estate & trust tax returns', included: true },
+      { label: 'SA903 worksheet from live data + SA900 estate income tax', included: true },
+      { label: 'Section 24 finance-cost reducer + R185 beneficiary apportionment', included: true },
+      { label: 'SA903 HMRC flat-PDF fill at calibrated coordinates + calibration overlay', included: true },
+      { label: 'Cross-year loss + finance-cost carry-forward', included: true },
+      { label: 'SA900 added to the tax-return filing tracker', included: true },
       { label: 'AI receipt scanning', included: true, note: 'Unlimited' },
       { label: 'E-signatures (incl. Joint AST + landlord countersign)', included: true, note: 'Unlimited' },
       { label: 'Open Banking auto-match', included: true, note: 'Unlimited banks' },
@@ -188,6 +201,14 @@ const FAQ = [
   {
     q: 'Can I file CT600 returns for my Limited Company / SPV?',
     a: 'Yes. PropertyApp is the only UK landlord tool with native Limited Company tax support. Pro and above include the CT600 preview flow with 12 company-specific expense categories, S455 director-loan tracking, ATED alerts, and Companies House deadline reminders. Company details live in Reference Data → Limited Companies.',
+  },
+  {
+    q: 'Can I file SA900 / SA903 estate or trust returns?',
+    a: 'Yes — Business and Portfolio / Agent. PropertyApp is the only UK landlord tool that handles estate and trust property income. Set a property to the ESTATE / TRUST ownership type and it appears on the dedicated /taxes/trust surface (and is excluded from SA105, CT600 and MTD). The app generates the HMRC SA903 “UK Property” working sheet from your live rent and expenses, computes the SA900 estate income tax with the Section 24 finance-cost reducer and the de minimis, apportions residuary income to beneficiaries via R185, and fills the real SA903 PDF by overlaying text at calibrated coordinates — with an in-app calibration overlay so you can align any future year yourself. Unused property losses and residential finance costs carry forward automatically once a year is confirmed.',
+  },
+  {
+    q: 'How does the tax-return filing tracker work?',
+    a: 'Mark each return Confirmed → Submitted → Accepted, with every stage dated. The tracker spans personal SA105 and company CT600 on Pro, and adds estate SA900 on Business. A deadline-aware compliance nag on the dashboard and /compliance surfaces what is overdue or due soon — built from the statutory deadlines (SA105 / SA900 31 January online, SA900 paper 31 October, CT600 twelve months after the period end, CT600 payment nine months and a day) — and goes quiet once a return is accepted.',
   },
   {
     q: 'What\u2019s in the HMO compliance module?',
@@ -252,7 +273,7 @@ export default function PricingPage() {
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Simple, transparent pricing</h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Start free with up to 3 properties. Upgrade as your portfolio grows. No hidden fees, cancel anytime.
-            HMO, CT600 and Section 42 included where it matters.
+            HMO, CT600, SA900/SA903 estate/trust and Section 42 included where it matters.
           </p>
         </div>
       </section>

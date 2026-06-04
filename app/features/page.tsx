@@ -28,6 +28,9 @@ import {
   Banknote,
   LineChart,
   RefreshCw,
+  Scroll,
+  ListChecks,
+  History,
 } from 'lucide-react'
 import type { Metadata } from 'next'
 
@@ -36,12 +39,12 @@ const APP_URL = 'https://property-app-pi-fawn.vercel.app'
 export const metadata: Metadata = {
   title: 'Features — PropertyApp',
   description:
-    'SA105 + CT600 tax returns, HMO compliance, Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 Wave 1 + 2 dispatch, MTD quarterly submissions, Growth Plan snapshots, tenant referencing, and more \u2014 the only UK landlord software that covers personal, company and HMO portfolios end to end.',
+    'SA105 + CT600 + SA900/SA903 (estate/trust) tax returns, a per-return filing tracker, HMO compliance, Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 Wave 1 + 2 dispatch, MTD quarterly submissions, Growth Plan snapshots, tenant referencing, and more \u2014 the only UK landlord software that covers personal, company, estate and HMO portfolios end to end.',
 }
 
 const FEATURE_SECTIONS = [
   {
-    category: 'UK Tax \u2014 Personal (SA105) & Company (CT600)',
+    category: 'UK Tax \u2014 Personal (SA105), Company (CT600) & Estate/Trust (SA900/SA903)',
     features: [
       {
         icon: BarChart3,
@@ -82,6 +85,36 @@ const FEATURE_SECTIONS = [
           'Companies House filing deadline reminders',
           'Grouped by linked companyId (Reference Data)',
           'Auto-detects wrong ownership type with warning banner',
+        ],
+      },
+      {
+        icon: Scroll,
+        title: 'SA900 / SA903 Trust & Estate Returns',
+        description:
+          'The only UK landlord tool that handles estate and trust property income. Generate the HMRC SA903 “UK Property” working sheet from live rent, expense and mortgage-interest data, then compute the SA900 estate income tax and apportion residuary income to beneficiaries — no competitor acknowledges this ownership type at all.',
+        bullets: [
+          'SA903 (UK Property / TL2) working sheet generated from live data',
+          'SA900 estate income tax by regime — administration / interest in possession / discretionary',
+          'Section 24 residential finance-cost reducer + de minimis + standard-rate band',
+          'R185 (Estate Income) beneficiary apportionment',
+          'Fills the real HMRC SA903 flat PDF — text overlaid at calibrated (x, y) coordinates via pdf-lib',
+          'In-app per-field nudge / stretch calibration overlay — align any future year without a developer',
+          'SA900 hand-filing checklist + combined template print',
+          'Cross-year property-loss + residential finance-cost carry-forward, automatic once a year is confirmed',
+          'ESTATE / TRUST cleanly excluded from SA105, CT600 and MTD',
+        ],
+      },
+      {
+        icon: ListChecks,
+        title: 'Tax-Return Filing Tracker',
+        description:
+          'One tracker spanning personal SA105, company CT600 and estate SA900. Mark each return Confirmed → Submitted → Accepted (every stage dated), and let a deadline-aware compliance nag chase what is overdue or due soon — then fall silent once a return is accepted.',
+        bullets: [
+          'Confirmed → Submitted → Accepted lifecycle, each stage dated by you',
+          'Spans SA105 + CT600 + SA900 under one roof',
+          'Deadline-aware severity — overdue / due-soon / not-started / submitted / accepted',
+          'Statutory deadlines built in — SA105/SA900 31 Jan online, SA900 paper 31 Oct, CT600 +12 months, CT600 payment +9 months + 1 day',
+          'Dashboard + /compliance nudges; returns go quiet once accepted',
         ],
       },
       {
@@ -164,13 +197,26 @@ const FEATURE_SECTIONS = [
         icon: RefreshCw,
         title: 'Mid-year Ownership Transfers',
         description:
-          'Atomic, reversible, audit-logged transfers between SINGLE / JOINT / COMPANY / MANAGED ownership types — split a tax year cleanly between SA105 and CT600 when a property moves to your SPV part-way through.',
+          'Atomic, reversible, audit-logged transfers between SINGLE / JOINT / COMPANY / MANAGED / ESTATE / TRUST ownership types — split a tax year cleanly between SA105 and CT600 when a property moves to your SPV part-way through.',
         bullets: [
           'Pre-flight diff: shows 2024-25 SA105 totals before and after — refuses to commit if they would change',
           'Atomic transfer route — closes one PropertyOwnership period and opens another',
           'Reversal flow restores prior state with audit trail',
           'Ownership history timeline on the property Overview tab',
           'Time-aware tax filtering — records dated D belong to whichever return covered ownership at D',
+        ],
+      },
+      {
+        icon: History,
+        title: 'Time-Based Tenancy History',
+        description:
+          'Sibling of ownership history on the tenancy side. Every rent change, deposit change, tenant change or lease-type change opens a new TenancyPeriod at the actual effective date, so SA105 / CT600 / MTD sum rent by months active in each period instead of a single forward estimate — a mid-year rent change lands in the right period.',
+        bullets: [
+          'New TenancyPeriod row at every rent / deposit / tenant / lease-type change',
+          'Tax surfaces sum period.rentAmount × months active, not a single forward column',
+          'Canonical writer (applyRenewedRent) propagates a renewal in one transaction',
+          'Mid-year rent changes split correctly across the tax-year boundary',
+          'Underpins Form 4A rent propagation and Statement of Tenancy Terms re-send',
         ],
       },
     ],
@@ -512,14 +558,14 @@ const FEATURE_SECTIONS = [
         icon: Building2,
         title: 'Property Portfolio Dashboard',
         description:
-          'A complete overview at a glance. Track total value, equity, monthly income, profit, and yields across all properties \u2014 personal, joint, company and managed. Property lifecycle handled in two distinct flows: Delete (full Prisma + KV cascade for incomplete purchases) or Archive (preserves history for sold properties so historic returns still resolve).',
+          'A complete overview at a glance. Track total value, equity, monthly income, profit, and yields across all properties \u2014 personal, joint, company, managed and estate/trust. Property lifecycle handled in two distinct flows: Delete (full Prisma + KV cascade for incomplete purchases) or Archive (preserves history for sold properties so historic returns still resolve).',
         bullets: [
           'Auto-calculated net profit, yields, and LTV ratios',
           'Property status (Active, Buying, Selling, Issue)',
           'Mortgage renewal alerts with countdown',
           'Portfolio summary PDF export',
-          'Four ownership types \u2014 SINGLE, JOINT, COMPANY, MANAGED',
-          'MANAGED properties shown operationally but excluded from every tax surface',
+          'Six ownership states \u2014 SINGLE, JOINT, COMPANY, MANAGED, ESTATE, TRUST',
+          'MANAGED shown operationally (excluded from every tax surface); ESTATE / TRUST routed to the SA900/SA903 surface and excluded from SA105 / CT600 / MTD',
           'Delete vs Archive \u2014 two lifecycles. Delete cleans everything for properties that never completed; Archive preserves history for sold properties',
         ],
       },
@@ -556,7 +602,7 @@ const FEATURE_SECTIONS = [
         icon: Lock,
         title: 'Audit Log, GDPR, Multi-User & Self-Host',
         description:
-          'Privacy, security and compliance built in \u2014 important for landlords handling tenant data under DPA / UK GDPR obligations. Plan-tier feature gating, an Owner role and multi-user invites with full invite audit. 2,756 regression tests across 212 suites keep cascade-locked contracts pinned at build time.',
+          'Privacy, security and compliance built in \u2014 important for landlords handling tenant data under DPA / UK GDPR obligations. Plan-tier feature gating, an Owner role and multi-user invites with full invite audit. 3,254 regression tests across 243 suites keep cascade-locked contracts pinned at build time.',
         bullets: [
           'AES-256-GCM encryption at rest',
           'Per-account isolated database',
@@ -566,7 +612,7 @@ const FEATURE_SECTIONS = [
           'Plan-tier feature gating with one-click upgrade prompts',
           'GDPR data export and erasure',
           'Self-hosted deployment option (Portfolio / Agent tier)',
-          '2,756 regression tests across 212 suites \u2014 cascade-locked contract tests fail the build if a route bypasses the canonical writer',
+          '3,254 regression tests across 243 suites \u2014 cascade-locked contract tests fail the build if a route bypasses the canonical writer',
           'Pre-push build validation on every release',
         ],
       },
@@ -584,9 +630,9 @@ export default function FeaturesPage() {
             Every feature a professional UK landlord needs
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-            Built for landlords running personal, joint and SPV portfolios with HMO and leasehold exposure.
-            The only UK tool that combines SA105 + CT600, Section 42, Renters&rsquo; Rights Act 2025, and
-            HMO end-to-end compliance in one product.
+            Built for landlords running personal, joint, SPV and inherited-estate portfolios with HMO and
+            leasehold exposure. The only UK tool that combines SA105 + CT600 + SA900/SA903 (estate/trust),
+            Section 42, Renters&rsquo; Rights Act 2025, and HMO end-to-end compliance in one product.
           </p>
         </div>
       </section>

@@ -25,6 +25,8 @@ import {
   RefreshCw,
   FileCheck,
   Wrench,
+  Scroll,
+  ListChecks,
 } from 'lucide-react'
 import Link from 'next/link'
 import { FeatureCard } from '@/components/feature-card'
@@ -34,9 +36,21 @@ const APP_URL = 'https://property-app-pi-fawn.vercel.app'
 const FEATURES = [
   {
     icon: Landmark,
-    title: 'SA105 + CT600 Under One Roof',
+    title: 'SA105 + CT600 + SA900 — Three Tax Surfaces',
     description:
-      'The only UK landlord tool that covers both Personal (SA105) and Limited Company (CT600) returns. Records-first per-property running costs, mid-year rate-change splits, per-property drill-down, S455 director loans, ATED alerts, and Companies House deadlines.',
+      'The only UK landlord tool covering Personal (SA105), Limited Company (CT600) and Estate/Trust (SA900/SA903) returns side by side. Records-first running costs, mid-year rate-change splits, per-property drill-down, and a per-return filing tracker across all three.',
+  },
+  {
+    icon: Scroll,
+    title: 'Trust & Estate SA900/SA903',
+    description:
+      'Generate the HMRC SA903 “UK Property” worksheet from live rent and expenses, compute SA900 estate income tax with the Section 24 finance-cost reducer, apportion residuary income to beneficiaries via R185, and fill the real SA903 PDF at calibrated coordinates. No competitor touches estate/trust at all.',
+  },
+  {
+    icon: ListChecks,
+    title: 'Tax-Return Filing Tracker',
+    description:
+      'Mark every SA105, CT600 and SA900 return Confirmed → Submitted → Accepted, each stage dated. A deadline-aware compliance nag chases overdue and due-soon returns from the dashboard — then goes quiet once accepted.',
   },
   {
     icon: RefreshCw,
@@ -137,7 +151,7 @@ const FEATURES = [
 ]
 
 const TRUST_POINTS = [
-  { icon: Landmark, text: 'Personal + Company (SA105 + CT600)' },
+  { icon: Landmark, text: 'Personal + Company + Estate (SA105 · CT600 · SA900)' },
   { icon: RefreshCw, text: 'Form 4A statutory rent-review workflow' },
   { icon: Home, text: '30+ UK councils HMO licensing data' },
   { icon: Scale, text: 'Section 42 statutory workflow' },
@@ -146,7 +160,7 @@ const TRUST_POINTS = [
   { icon: LineChart, text: 'Rent Review Insights with ONS index' },
   { icon: Bell, text: 'Renters\u2019 Rights Act 2025 \u2014 Wave 1 + 2 dispatch' },
   { icon: Lock, text: 'AES-256-GCM + GDPR + audit log' },
-  { icon: Zap, text: '2,756 regression tests across 212 suites' },
+  { icon: Zap, text: '3,254 regression tests across 243 suites' },
 ]
 
 export default function HomePage() {
@@ -161,14 +175,15 @@ export default function HomePage() {
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight max-w-4xl mx-auto leading-tight">
-            Personal, company and HMO portfolios,{' '}
+            Personal, company, estate and HMO portfolios,{' '}
             <span className="text-primary">one platform</span>
           </h1>
 
           <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            The only UK landlord software that covers SA105 and CT600, Section 42 leasehold extensions,
-            Renters&rsquo; Rights Act 2025, Form 4A statutory rent reviews, and end-to-end HMO compliance.
-            Built for landlords running personal, joint and SPV portfolios.
+            The only UK landlord software that covers SA105, CT600 and SA900/SA903 (estate &amp; trust)
+            returns, Section 42 leasehold extensions, Renters&rsquo; Rights Act 2025, Form 4A statutory
+            rent reviews, and end-to-end HMO compliance. Built for landlords running personal, joint, SPV
+            and inherited-estate portfolios.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
@@ -197,8 +212,8 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <p className="text-2xl font-bold">SA105 + CT600</p>
-              <p className="text-sm text-muted-foreground">Personal & company tax</p>
+              <p className="text-2xl font-bold">3 tax surfaces</p>
+              <p className="text-sm text-muted-foreground">SA105, CT600 &amp; SA900/SA903</p>
             </div>
             <div>
               <p className="text-2xl font-bold">30+</p>
@@ -263,7 +278,7 @@ export default function HomePage() {
                 icon: BarChart3,
                 title: 'Manage Everything',
                 description:
-                  'Track income, expenses, HMO compliance, leaseholds, and SA105 + CT600 tax returns. Generate reports when you need them.',
+                  'Track income, expenses, HMO compliance, leaseholds, and SA105, CT600 + SA900 tax returns. Generate reports when you need them.',
               },
             ].map((item) => (
               <div key={item.step} className="text-center">

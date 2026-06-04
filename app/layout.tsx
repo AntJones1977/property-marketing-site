@@ -14,6 +14,8 @@ export const metadata: Metadata = {
     'UK landlord software',
     'property portfolio management',
     'SA105 tax software',
+    'CT600 company tax software',
+    'SA900 estate & trust tax software',
     'buy-to-let management',
     'rental property software',
     'landlord app UK',
