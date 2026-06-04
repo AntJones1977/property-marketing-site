@@ -25,7 +25,7 @@ const VALUES = [
     icon: Target,
     title: 'UK-Focused, End-to-End',
     description:
-      'The only UK tool that covers SA105 + CT600 (with AIA + WDA capital allowances), Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 Wave 1 + 2 dispatch, Open Banking auto-match, ONS-driven Rent Review Insights, and HMO end-to-end \u2014 with Reference Data for the companies, solicitors and brokers behind the portfolio.',
+      'The only UK tool that covers SA105 + CT600 + SA900/SA903 (personal, company and estate/trust returns, with AIA + WDA capital allowances on the company side), Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 Wave 1 + 2 dispatch, Open Banking auto-match, ONS-driven Rent Review Insights, and HMO end-to-end \u2014 with Reference Data for the companies, solicitors and brokers behind the portfolio.',
   },
   {
     icon: Building2,
@@ -62,18 +62,20 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold tracking-tight">Our story</h2>
             <p className="text-muted-foreground leading-relaxed">
               Managing a buy-to-let portfolio in the UK means juggling properties, mortgages, tenants,
-              compliance certificates, SA105 and CT600 returns, HMO licences, leasehold extensions, and
+              compliance certificates, SA105, CT600 and SA900/SA903 returns, HMO licences, leasehold extensions, and
               maintenance &mdash; often across disconnected spreadsheets, email threads, and filing cabinets.
             </p>
             <p className="text-muted-foreground leading-relaxed">
               We looked at the existing tools and found them either too expensive, too agent-centric, or
               missing the things that actually matter to a portfolio landlord: CT600 for the SPV,
-              Section 42 for the flat with a shrinking lease, HMO licence data by council, and the
+              SA900/SA903 for the inherited estate, Section 42 for the flat with a shrinking lease,
+              HMO licence data by council, and the
               Renters&rsquo; Rights Act 2025 deadline on the dashboard. So we built PropertyApp.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Today, PropertyApp is the only UK product that brings SA105 + CT600 under one roof
-              (with full capital allowances &mdash; AIA + WDA), tracks Section 42 leasehold extensions,
+              Today, PropertyApp is the only UK product that brings SA105 + CT600 + SA900/SA903 under
+              one roof (personal, company and estate/trust &mdash; with full company capital allowances,
+              AIA + WDA), tracks Section 42 leasehold extensions,
               ships Renters&rsquo; Rights Act 2025 Wave 1 + 2 dispatch out of the box, links UK banks
               via Open Banking with a deterministic auto-match engine, and surfaces Rent Review Insights
               from the ONS Private Rental Index. HMO end-to-end &mdash; licence, rooms, FRA, amenity
