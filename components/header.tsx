@@ -9,6 +9,7 @@ const APP_URL = 'https://property-app-pi-fawn.vercel.app'
 const NAV_LINKS = [
   { href: '/features', label: 'Features' },
   { href: '/pricing', label: 'Pricing' },
+  { href: '/guides', label: 'Guides' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ]
