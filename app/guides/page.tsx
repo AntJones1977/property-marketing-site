@@ -17,6 +17,7 @@ import {
   UserCheck,
   MapPin,
   Gift,
+  Gavel,
 } from 'lucide-react'
 
 const APP_URL = 'https://property-app-pi-fawn.vercel.app'
@@ -155,12 +156,39 @@ const COMPLIANCE_GUIDES: Guide[] = [
     description:
       'Licensing for ordinary rentals in designated areas — how to check, what’s involved, and the penalties.',
   },
+  {
+    href: '/guides/section-8-possession-grounds',
+    icon: Gavel,
+    tag: 'Tenancies',
+    title: 'Section 8: grounds for possession',
+    description:
+      'After Section 21, the grounds you can rely on, mandatory vs discretionary, notice periods and evidence.',
+  },
+]
+
+const MONEY_GUIDES: Guide[] = [
+  {
+    href: '/guides/landlord-insurance-rent-guarantee',
+    icon: Shield,
+    tag: 'Money',
+    title: 'Landlord insurance & rent guarantee',
+    description:
+      'What landlord cover includes, whether you need rent protection, and what lenders require.',
+  },
+  {
+    href: '/guides/buy-to-let-mortgages',
+    icon: Building2,
+    tag: 'Money',
+    title: 'Buy-to-let mortgages: a primer',
+    description:
+      'How BTL lending differs, personal vs company borrowing, stress tests, and remortgaging.',
+  },
 ]
 
 const COMING_SOON = [
-  { icon: Scale, title: 'Section 8: grounds for possession explained', tag: 'Tenancies' },
-  { icon: Shield, title: 'Rent guarantee & landlord insurance', tag: 'Money' },
-  { icon: Building2, title: 'Buy-to-let mortgages: a primer', tag: 'Money' },
+  { icon: Landmark, title: 'Stamp Duty & the 3% surcharge for landlords', tag: 'Tax' },
+  { icon: Scale, title: 'Evicting a tenant: the court process', tag: 'Tenancies' },
+  { icon: Building2, title: 'Tax for non-resident landlords (NRL)', tag: 'Tax' },
 ]
 
 function GuideCard({ guide }: { guide: Guide }) {
@@ -262,6 +290,21 @@ export default function GuidesPage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {COMPLIANCE_GUIDES.map((g) => (
+              <GuideCard key={g.href} guide={g} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Money & finance guides */}
+      <section className="py-12">
+        <div className="mx-auto max-w-7xl px-6">
+          <h2 className="text-2xl font-bold tracking-tight mb-2">Money & finance</h2>
+          <p className="text-muted-foreground mb-8">
+            Insurance, mortgages and the financial side of running a portfolio.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {MONEY_GUIDES.map((g) => (
               <GuideCard key={g.href} guide={g} />
             ))}
           </div>
