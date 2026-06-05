@@ -40,10 +40,34 @@ const FEATURED = {
   readingTime: '14 min read',
 }
 
+const GUIDES = [
+  {
+    href: '/guides/sa105-landlord-tax',
+    icon: Landmark,
+    tag: 'Tax',
+    title: 'SA105: the landlord’s guide to property income tax',
+    description:
+      'Who needs to file, what counts as income and allowable expenses, the Section 24 mortgage rules, and the deadlines.',
+  },
+  {
+    href: '/guides/ct600-property-spv-tax',
+    icon: Building2,
+    tag: 'Tax',
+    title: 'CT600 for property companies (SPVs)',
+    description:
+      'Company property tax, full mortgage-interest relief, capital allowances, director’s loans (S455) and ATED.',
+  },
+  {
+    href: '/guides/sa900-estate-trust-tax',
+    icon: Scroll,
+    tag: 'Tax',
+    title: 'SA900 & SA903: tax on inherited & trust property',
+    description:
+      'Estate and trust rental income, the Section 24 reducer, R185s to beneficiaries, and the deadlines.',
+  },
+]
+
 const COMING_SOON = [
-  { icon: Landmark, title: 'SA105: the landlord’s guide to property income tax', tag: 'Tax' },
-  { icon: Building2, title: 'CT600 for property SPVs: company tax for landlords', tag: 'Tax' },
-  { icon: Scroll, title: 'SA900 / SA903: tax on inherited & trust property', tag: 'Tax' },
   { icon: RefreshCw, title: 'Form 4A: how to increase rent the legal way', tag: 'Tenancies' },
   { icon: Home, title: 'HMO licensing: a council-by-council guide', tag: 'HMO' },
   { icon: Scale, title: 'Section 42: extending a short residential lease', tag: 'Leasehold' },
@@ -98,8 +122,46 @@ export default function GuidesPage() {
         </div>
       </section>
 
-      {/* Checker CTA */}
+      {/* Live guides */}
       <section className="pb-4">
+        <div className="mx-auto max-w-7xl px-6">
+          <h2 className="text-2xl font-bold tracking-tight mb-2">Landlord tax, explained</h2>
+          <p className="text-muted-foreground mb-8">
+            The only UK app that covers all three property-tax surfaces — here’s each one in plain English.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {GUIDES.map((g) => {
+              const Icon = g.icon
+              return (
+                <Link
+                  key={g.href}
+                  href={g.href}
+                  className="group rounded-xl border border-border p-6 bg-background hover:shadow-md hover:border-primary/40 transition-all flex flex-col"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Icon className="h-5 w-5 text-primary" />
+                    </div>
+                    <span className="text-xs font-medium text-muted-foreground rounded-full border border-border px-2 py-0.5">
+                      {g.tag}
+                    </span>
+                  </div>
+                  <h3 className="text-base font-semibold leading-snug group-hover:text-primary transition-colors">
+                    {g.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">{g.description}</p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+                    Read the guide <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                  </span>
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Checker CTA */}
+      <section className="py-12">
         <div className="mx-auto max-w-7xl px-6">
           <div className="rounded-2xl border border-primary/30 bg-primary/5 p-6 md:p-8 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
             <div>
