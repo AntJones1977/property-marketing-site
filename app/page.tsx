@@ -164,8 +164,27 @@ const TRUST_POINTS = [
 ]
 
 export default function HomePage() {
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'PropertyApp',
+      url: 'https://www.marpropertyinvestments.co.uk',
+      description: 'Property portfolio management software for UK landlords.',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'PropertyApp',
+      url: 'https://www.marpropertyinvestments.co.uk',
+    },
+  ]
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero */}
       <section className="bg-gradient-to-b from-background to-muted/30 py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 text-center">
