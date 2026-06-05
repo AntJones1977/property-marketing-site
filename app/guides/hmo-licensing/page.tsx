@@ -114,6 +114,11 @@ export default function HmoGuide() {
       ]}
       ctaTitle="HMO compliance, end to end"
       ctaText="Licence tracking across 30+ councils, room-size and amenity checks, fire-safety logs and a fit & proper register — all in one place. Free for up to 3 properties."
+      related={[
+        { href: '/guides/selective-licensing', title: 'Selective licensing' },
+        { href: '/guides/epc-mees-energy-standards', title: 'EPC & MEES standards' },
+        { href: '/guides/renters-rights-act-2026', title: 'Renters’ Rights Act 2026' },
+      ]}
     />
   )
 }

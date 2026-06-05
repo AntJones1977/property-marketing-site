@@ -111,6 +111,11 @@ export default function DepositGuide() {
       ]}
       ctaTitle="Deposit protection you can prove"
       ctaText="Track the amount, scheme and protection date for every tenancy, with the prescribed information stored alongside. Free to start."
+      related={[
+        { href: '/guides/renters-rights-act-2026', title: 'Renters’ Rights Act 2026' },
+        { href: '/guides/form-4a-rent-increase', title: 'Form 4A rent increases' },
+        { href: '/guides/right-to-rent-checks', title: 'Right to Rent checks' },
+      ]}
     />
   )
 }

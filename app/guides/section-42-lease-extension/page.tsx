@@ -110,6 +110,10 @@ export default function Section42Guide() {
       ]}
       ctaTitle="Never miss the 80-year cliff edge"
       ctaText="PropertyApp tracks every Section 42 lease extension from notice to completion, with an 80-year warning and built-in legal reference. Free to start."
+      related={[
+        { href: '/guides/hmo-licensing', title: 'HMO licensing' },
+        { href: '/guides/renters-rights-act-2026', title: 'Renters’ Rights Act 2026' },
+      ]}
     />
   )
 }

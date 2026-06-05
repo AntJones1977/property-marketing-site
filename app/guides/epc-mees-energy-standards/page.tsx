@@ -111,6 +111,10 @@ export default function EpcGuide() {
       ]}
       ctaTitle="Never let an EPC lapse"
       ctaText="Store EPCs with expiry dates, get reminders before they run out, and see your whole portfolio’s standing at a glance. Free for up to 3 properties."
+      related={[
+        { href: '/guides/renters-rights-act-2026', title: 'Renters’ Rights Act 2026' },
+        { href: '/guides/hmo-licensing', title: 'HMO licensing' },
+      ]}
     />
   )
 }

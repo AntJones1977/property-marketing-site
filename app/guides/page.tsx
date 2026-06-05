@@ -16,6 +16,7 @@ import {
   Lock,
   UserCheck,
   MapPin,
+  Gift,
 } from 'lucide-react'
 
 const APP_URL = 'https://property-app-pi-fawn.vercel.app'
@@ -87,6 +88,14 @@ const TAX_GUIDES: Guide[] = [
     description:
       'How the gain is calculated, the rates and annual exemption, the 60-day rule, and the reliefs that cut the bill.',
   },
+  {
+    href: '/guides/inheritance-tax-property-portfolio',
+    icon: Gift,
+    tag: 'Tax',
+    title: 'Inheritance tax & your property portfolio',
+    description:
+      'How IHT hits a portfolio, the nil-rate bands, the main reliefs, and planning ideas to discuss with an adviser.',
+  },
 ]
 
 const COMPLIANCE_GUIDES: Guide[] = [
@@ -130,12 +139,28 @@ const COMPLIANCE_GUIDES: Guide[] = [
     description:
       'The 30-day rule, the three schemes, the deposit cap, penalties and end-of-tenancy disputes.',
   },
+  {
+    href: '/guides/right-to-rent-checks',
+    icon: UserCheck,
+    tag: 'Compliance',
+    title: 'Right to Rent checks',
+    description:
+      'Who to check, how to do it (including online and IDVT checks), the penalties, and keeping a compliant record.',
+  },
+  {
+    href: '/guides/selective-licensing',
+    icon: MapPin,
+    tag: 'Licensing',
+    title: 'Selective licensing: is your area covered?',
+    description:
+      'Licensing for ordinary rentals in designated areas — how to check, what’s involved, and the penalties.',
+  },
 ]
 
 const COMING_SOON = [
-  { icon: UserCheck, title: 'Right to Rent checks without the headaches', tag: 'Compliance' },
-  { icon: Landmark, title: 'Inheritance tax & your property portfolio', tag: 'Tax' },
-  { icon: MapPin, title: 'Selective licensing: is your area covered?', tag: 'Licensing' },
+  { icon: Scale, title: 'Section 8: grounds for possession explained', tag: 'Tenancies' },
+  { icon: Shield, title: 'Rent guarantee & landlord insurance', tag: 'Money' },
+  { icon: Building2, title: 'Buy-to-let mortgages: a primer', tag: 'Money' },
 ]
 
 function GuideCard({ guide }: { guide: Guide }) {

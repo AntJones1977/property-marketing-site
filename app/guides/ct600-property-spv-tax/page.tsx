@@ -128,6 +128,11 @@ export default function Ct600Guide() {
       ]}
       ctaTitle="CT600 for your SPV, without the spreadsheet gymnastics"
       ctaText="PropertyApp is the only UK landlord tool with native limited-company tax — records-first running costs, capital allowances, S455 and ATED, grouped per company. Free to start."
+      related={[
+        { href: '/guides/sa105-landlord-tax', title: 'SA105: property income tax' },
+        { href: '/guides/capital-gains-tax-rental-property', title: 'Capital Gains Tax on a sale' },
+        { href: '/guides/sa900-estate-trust-tax', title: 'SA900: estate & trust tax' },
+      ]}
     />
   )
 }

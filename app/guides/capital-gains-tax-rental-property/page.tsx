@@ -118,6 +118,11 @@ export default function CgtGuide() {
       ]}
       ctaTitle="Sell with the numbers ready"
       ctaText="PropertyApp keeps your purchase price, improvements and disposal details in one place — and preserves a sold property’s history — so the CGT calculation is straightforward. Free to start."
+      related={[
+        { href: '/guides/sa105-landlord-tax', title: 'SA105: property income tax' },
+        { href: '/guides/ct600-property-spv-tax', title: 'CT600 for property companies' },
+        { href: '/guides/inheritance-tax-property-portfolio', title: 'Inheritance tax & your portfolio' },
+      ]}
     />
   )
 }
