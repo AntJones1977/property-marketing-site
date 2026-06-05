@@ -305,6 +305,22 @@ export default function RentersRightsActGuide() {
       {/* Body */}
       <section className="py-12">
         <div className="mx-auto max-w-3xl px-6">
+          {/* Checker CTA */}
+          <div className="rounded-xl border border-primary/30 bg-primary/5 p-6 mb-10 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+            <div>
+              <p className="font-semibold">Not sure where you stand?</p>
+              <p className="text-sm text-muted-foreground">
+                Take the free 2-minute readiness check and get a personalised action plan.
+              </p>
+            </div>
+            <Link
+              href="/rra-check"
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors gap-2 shrink-0"
+            >
+              Check my compliance <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
           {/* TOC */}
           <div className="rounded-xl border border-border bg-muted/30 p-6 mb-12">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-3">

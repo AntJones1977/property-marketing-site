@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/pricing',
     '/guides',
     '/guides/renters-rights-act-2026',
+    '/rra-check',
     '/about',
     '/contact',
     '/privacy',
@@ -18,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((path) => ({
     url: `${BASE}${path}`,
     lastModified: now,
-    changeFrequency: path.startsWith('/guides') ? 'weekly' : 'monthly',
-    priority: path === '' ? 1 : path.startsWith('/guides') ? 0.8 : 0.6,
+    changeFrequency: path.startsWith('/guides') || path === '/rra-check' ? 'weekly' : 'monthly',
+    priority: path === '' ? 1 : path.startsWith('/guides') || path === '/rra-check' ? 0.8 : 0.6,
   }))
 }

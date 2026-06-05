@@ -98,6 +98,27 @@ export default function GuidesPage() {
         </div>
       </section>
 
+      {/* Checker CTA */}
+      <section className="pb-4">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="rounded-2xl border border-primary/30 bg-primary/5 p-6 md:p-8 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+            <div>
+              <p className="text-lg font-semibold">Not sure if you’re compliant?</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Take the free 2-minute Renters’ Rights Act readiness check and get a personalised action
+                plan emailed to you.
+              </p>
+            </div>
+            <Link
+              href="/rra-check"
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors gap-2 shrink-0"
+            >
+              Take the free check <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Coming soon */}
       <section className="py-12 bg-muted/30">
         <div className="mx-auto max-w-7xl px-6">
