@@ -351,8 +351,74 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Pricing preview */}
+      {/* Guides & tools */}
       <section className="py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tight">Free guides &amp; tools for UK landlords</h2>
+            <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
+              Plain-English answers to the questions landlords actually ask &mdash; plus a free 2-minute
+              compliance check.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <Link
+              href="/guides/renters-rights-act-2026"
+              className="group rounded-xl border border-border bg-background p-6 hover:shadow-md hover:border-primary/40 transition-all"
+            >
+              <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <Shield className="h-5 w-5 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+                Renters&rsquo; Rights Act 2026 guide
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Everything changing for landlords &mdash; Section 21, periodic tenancies, Form 4A,
+                penalties &mdash; and what to do.
+              </p>
+            </Link>
+            <Link
+              href="/rra-check"
+              className="group rounded-xl border border-border bg-background p-6 hover:shadow-md hover:border-primary/40 transition-all"
+            >
+              <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <ListChecks className="h-5 w-5 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+                Free RRA compliance check
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Answer 10 questions, get your readiness score and a personalised action plan by email.
+              </p>
+            </Link>
+            <Link
+              href="/guides"
+              className="group rounded-xl border border-border bg-background p-6 hover:shadow-md hover:border-primary/40 transition-all"
+            >
+              <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <FileText className="h-5 w-5 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+                All landlord guides
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Tax (SA105, CT600, SA900), HMO licensing, Form 4A, leasehold, CGT, EPC and more.
+              </p>
+            </Link>
+          </div>
+          <div className="text-center mt-8">
+            <Link
+              href="/guides"
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+            >
+              Browse all guides <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing preview */}
+      <section className="py-20 bg-muted/30">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h2 className="text-3xl font-bold tracking-tight">Simple, transparent pricing</h2>
           <p className="mt-3 text-lg text-muted-foreground mb-8">Start free. Upgrade as your portfolio grows.</p>

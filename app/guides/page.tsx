@@ -14,6 +14,8 @@ import {
   PoundSterling,
   Zap,
   Lock,
+  UserCheck,
+  MapPin,
 } from 'lucide-react'
 
 const APP_URL = 'https://property-app-pi-fawn.vercel.app'
@@ -77,6 +79,14 @@ const TAX_GUIDES: Guide[] = [
     description:
       'Estate and trust rental income, the Section 24 reducer, R185s to beneficiaries, and the deadlines.',
   },
+  {
+    href: '/guides/capital-gains-tax-rental-property',
+    icon: PoundSterling,
+    tag: 'Tax',
+    title: 'Capital Gains Tax when you sell a rental',
+    description:
+      'How the gain is calculated, the rates and annual exemption, the 60-day rule, and the reliefs that cut the bill.',
+  },
 ]
 
 const COMPLIANCE_GUIDES: Guide[] = [
@@ -104,12 +114,28 @@ const COMPLIANCE_GUIDES: Guide[] = [
     description:
       'The statutory route, the 80-year cliff edge, the notice process, and how leasehold reform changes things.',
   },
+  {
+    href: '/guides/epc-mees-energy-standards',
+    icon: Zap,
+    tag: 'Compliance',
+    title: 'EPC & MEES: minimum energy standards',
+    description:
+      'The current EPC E minimum, the proposed move to EPC C, exemptions, penalties and how to improve a rating.',
+  },
+  {
+    href: '/guides/tenancy-deposit-protection',
+    icon: Lock,
+    tag: 'Tenancies',
+    title: 'Tenancy deposits: protection done right',
+    description:
+      'The 30-day rule, the three schemes, the deposit cap, penalties and end-of-tenancy disputes.',
+  },
 ]
 
 const COMING_SOON = [
-  { icon: PoundSterling, title: 'Capital Gains Tax when you sell a rental', tag: 'Tax' },
-  { icon: Zap, title: 'EPC & MEES: minimum energy efficiency standards', tag: 'Compliance' },
-  { icon: Lock, title: 'Tenancy deposits: protection done right', tag: 'Tenancies' },
+  { icon: UserCheck, title: 'Right to Rent checks without the headaches', tag: 'Compliance' },
+  { icon: Landmark, title: 'Inheritance tax & your property portfolio', tag: 'Tax' },
+  { icon: MapPin, title: 'Selective licensing: is your area covered?', tag: 'Licensing' },
 ]
 
 function GuideCard({ guide }: { guide: Guide }) {
