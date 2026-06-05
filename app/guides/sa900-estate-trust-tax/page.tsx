@@ -131,6 +131,11 @@ export default function Sa900Guide() {
       ]}
       ctaTitle="The only landlord app that handles estate & trust tax"
       ctaText="PropertyApp generates the SA903 worksheet from live data, computes SA900 estate income tax with the Section 24 reducer, and apportions R185s to beneficiaries — alongside your SA105 and CT600. Free to start."
+      related={[
+        { href: '/guides/sa105-landlord-tax', title: 'SA105: property income tax' },
+        { href: '/guides/ct600-property-spv-tax', title: 'CT600 for property companies' },
+        { href: '/guides/inheritance-tax-property-portfolio', title: 'Inheritance tax & your portfolio' },
+      ]}
     />
   )
 }

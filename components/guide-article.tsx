@@ -15,6 +15,11 @@ export interface GuideFaq {
   a: string
 }
 
+export interface GuideLink {
+  href: string
+  title: string
+}
+
 export interface GuideArticleProps {
   breadcrumb: string
   title: string
@@ -25,6 +30,7 @@ export interface GuideArticleProps {
   intro: string
   sections: GuideSection[]
   faqs: GuideFaq[]
+  related?: GuideLink[]
   ctaTitle: string
   ctaText: string
   disclaimer?: string
@@ -39,6 +45,7 @@ export function GuideArticle({
   intro,
   sections,
   faqs,
+  related,
   ctaTitle,
   ctaText,
   disclaimer = 'This guide is general information, not professional tax or legal advice. Rules, rates and thresholds change — check GOV.UK and take advice for your own situation.',
@@ -147,6 +154,25 @@ export function GuideArticle({
                     <h3 className="font-semibold mb-2">{f.q}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{f.a}</p>
                   </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Related guides */}
+          {related && related.length > 0 && (
+            <div className="mt-16">
+              <h2 className="text-lg font-semibold mb-4">Related guides</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {related.map((r) => (
+                  <Link
+                    key={r.href}
+                    href={r.href}
+                    className="group flex items-center justify-between rounded-lg border border-border bg-background px-4 py-3 hover:border-primary/40 hover:shadow-sm transition-all"
+                  >
+                    <span className="text-sm font-medium group-hover:text-primary transition-colors">{r.title}</span>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all shrink-0" />
+                  </Link>
                 ))}
               </div>
             </div>

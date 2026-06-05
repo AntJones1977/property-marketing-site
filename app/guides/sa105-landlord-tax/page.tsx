@@ -128,6 +128,11 @@ export default function Sa105Guide() {
       ]}
       ctaTitle="Your SA105, done in minutes — not a spreadsheet weekend"
       ctaText="PropertyApp maps your income and expenses to the right SA105 boxes, handles joint ownership and Section 24, and lets you lock the year and email your accountant. Free for up to 3 properties."
+      related={[
+        { href: '/guides/ct600-property-spv-tax', title: 'CT600 for property companies' },
+        { href: '/guides/capital-gains-tax-rental-property', title: 'Capital Gains Tax on a sale' },
+        { href: '/guides/sa900-estate-trust-tax', title: 'SA900: estate & trust tax' },
+      ]}
     />
   )
 }

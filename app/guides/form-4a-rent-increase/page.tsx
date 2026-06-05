@@ -112,6 +112,10 @@ export default function Form4aGuide() {
       ]}
       ctaTitle="Form 4A rent reviews, start to finish"
       ctaText="Propose, sign, send and track a Section 13 rent increase — and watch the new rent flow into your tax returns automatically. The only end-to-end Form 4A workflow in the UK. Free to start."
+      related={[
+        { href: '/guides/renters-rights-act-2026', title: 'Renters’ Rights Act 2026' },
+        { href: '/guides/tenancy-deposit-protection', title: 'Tenancy deposit protection' },
+      ]}
     />
   )
 }
