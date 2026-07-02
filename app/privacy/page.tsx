@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy — PropertyApp',
-  description: 'Privacy policy for PropertyApp by MAR Property Investments Ltd.',
+  description: 'Privacy policy for PropertyApp by MAR Property & Investments Ltd.',
 }
 
 export default function PrivacyPage() {
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
 
         <h2 className="text-xl font-semibold mt-8 mb-3">1. Data Controller</h2>
         <p className="text-muted-foreground leading-relaxed">
-          MAR Property Investments Ltd (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is the data controller responsible for your personal data. We are registered in England & Wales.
+          MAR Property & Investments Ltd (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is the data controller responsible for your personal data. We are registered in England & Wales.
         </p>
 
         <h2 className="text-xl font-semibold mt-8 mb-3">2. This Website</h2>

@@ -20,7 +20,7 @@ export const CONTACT_FROM_EMAIL =
  * Regulations 2015). COMPANY_NUMBER and REGISTERED_OFFICE must be completed
  * with the real Companies House values — the footer renders them once set.
  */
-export const COMPANY_NAME = 'MAR Property Investments Ltd'
+export const COMPANY_NAME = 'MAR Property & Investments Ltd'
 export const COMPANY_NUMBER = '' // TODO: set the real Companies House CRN
 export const REGISTERED_OFFICE = '' // TODO: set the registered office address
 export const PLACE_OF_REGISTRATION = 'England & Wales'
