@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Building2, Menu, X } from 'lucide-react'
 
-const APP_URL = 'https://property-app-pi-fawn.vercel.app'
+import { APP_URL } from '@/lib/site'
 
 const NAV_LINKS = [
   { href: '/features', label: 'Features' },

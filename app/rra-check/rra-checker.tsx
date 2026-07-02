@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { ArrowRight, ArrowLeft, AlertTriangle, Mail, Send, CheckCircle2 } from 'lucide-react'
 import { QUESTIONS, type RraAnswer } from '@/lib/rra-questions'
 
-const APP_URL = 'https://property-app-pi-fawn.vercel.app'
+import { APP_URL } from '@/lib/site'
 
 type Phase = 'quiz' | 'result' | 'done'
 
@@ -73,10 +73,10 @@ export function RraChecker() {
         <div className="mb-6">
           <div className="flex justify-between text-xs text-muted-foreground mb-2">
             <span>Question {step + 1} of {total}</span>
-            <span>{Math.round((step / total) * 100)}%</span>
+            <span>{Math.round(((step + 1) / total) * 100)}%</span>
           </div>
           <div className="h-2 rounded-full bg-muted overflow-hidden">
-            <div className="h-full bg-primary transition-all" style={{ width: `${(step / total) * 100}%` }} />
+            <div className="h-full bg-primary transition-all" style={{ width: `${((step + 1) / total) * 100}%` }} />
           </div>
         </div>
 

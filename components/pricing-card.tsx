@@ -1,6 +1,6 @@
 import { Check, X } from 'lucide-react'
 
-const APP_URL = 'https://property-app-pi-fawn.vercel.app'
+import { APP_URL } from '@/lib/site'
 
 interface PricingFeature {
   label: string

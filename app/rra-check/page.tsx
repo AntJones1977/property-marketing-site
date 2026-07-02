@@ -44,8 +44,8 @@ export default function RraCheckPage() {
         <div className="mx-auto max-w-2xl px-6">
           <RraChecker />
           <p className="mt-6 text-center text-xs text-muted-foreground">
-            General guidance, not legal advice. We&rsquo;ll only use your email to send your action plan and
-            occasional updates — unsubscribe any time.
+            General guidance, not legal advice. We&rsquo;ll only use your email to send your action plan —
+            nothing else, no mailing list.
           </p>
         </div>
       </section>

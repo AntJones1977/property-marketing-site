@@ -1,5 +1,11 @@
 import Link from 'next/link'
 import { Building2 } from 'lucide-react'
+import {
+  COMPANY_NAME,
+  COMPANY_NUMBER,
+  PLACE_OF_REGISTRATION,
+  REGISTERED_OFFICE,
+} from '@/lib/site'
 
 export function Footer() {
   return (
@@ -48,12 +54,16 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Statutory trading disclosures — Companies Act 2006 / Trading
+            Disclosures Regulations 2015. Do not remove this block. */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} MAR Property Investments Ltd. All rights reserved.
+            &copy; {new Date().getFullYear()} {COMPANY_NAME}. All rights reserved.
           </p>
-          <p className="text-sm text-muted-foreground">
-            Registered in England & Wales
+          <p className="text-sm text-muted-foreground text-center md:text-right">
+            {COMPANY_NAME} is registered in {PLACE_OF_REGISTRATION}
+            {COMPANY_NUMBER && <>, company no. {COMPANY_NUMBER}</>}
+            {REGISTERED_OFFICE && <>. Registered office: {REGISTERED_OFFICE}</>}.
           </p>
         </div>
       </div>
