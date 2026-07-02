@@ -2,7 +2,7 @@
 
 ## What this repo is
 
-Public marketing site for **PropertyApp** (MAR Property Investments Ltd).
+Public marketing site for **PropertyApp** (MAR Property & Investments Ltd).
 Next.js App Router + TypeScript strict + Tailwind 4. Static-first: marketing
 pages are prerendered; the ONLY server code is `app/api/contact` and
 `app/api/rra-check` (both send email via Resend, both rate-limited).

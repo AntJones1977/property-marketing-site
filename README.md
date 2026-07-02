@@ -1,7 +1,7 @@
 # PropertyApp Marketing Site
 
 Public marketing and lead-generation site for **PropertyApp**, the property
-portfolio management product of MAR Property Investments Ltd. Live at
+portfolio management product of MAR Property & Investments Ltd. Live at
 [marpropertyinvestments.co.uk](https://www.marpropertyinvestments.co.uk).
 
 ## Stack
