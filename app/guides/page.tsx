@@ -20,7 +20,7 @@ import {
   Gavel,
 } from 'lucide-react'
 
-const APP_URL = 'https://property-app-pi-fawn.vercel.app'
+import { APP_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Guides for UK Landlords — Renters’ Rights Act, Tax & HMO | PropertyApp',

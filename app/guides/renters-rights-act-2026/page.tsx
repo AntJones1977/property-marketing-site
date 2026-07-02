@@ -21,7 +21,7 @@ import {
   HelpCircle,
 } from 'lucide-react'
 
-const APP_URL = 'https://property-app-pi-fawn.vercel.app'
+import { APP_URL } from '@/lib/site'
 const CANONICAL = 'https://www.marpropertyinvestments.co.uk/guides/renters-rights-act-2026'
 const TITLE = 'The Renters’ Rights Act 2026: A Complete Compliance Guide for UK Landlords'
 const DESCRIPTION =

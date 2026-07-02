@@ -1,24 +1,25 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { QUESTIONS } from '@/lib/rra-questions'
+import {
+  APP_URL,
+  SITE_URL,
+  CONTACT_TO_EMAIL as TO_EMAIL,
+  CONTACT_FROM_EMAIL as FROM_EMAIL,
+} from '@/lib/site'
+import { checkRateLimit } from '@/lib/rate-limit'
+import { EMAIL_RE, MAX_EMAIL, MAX_NAME, escapeHtml, field } from '@/lib/email'
 
-// Mirrors the contact route's config so behaviour is consistent.
-const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? 'Marpropertyinvestmentsltd@mail.com'
-const FROM_EMAIL =
-  process.env.CONTACT_FROM_EMAIL ?? 'PropertyApp <contact@marpropertyinvestments.co.uk>'
-const APP_URL = 'https://property-app-pi-fawn.vercel.app'
-const GUIDE_URL = 'https://www.marpropertyinvestments.co.uk/guides/renters-rights-act-2026'
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-}
+const GUIDE_URL = `${SITE_URL}/guides/renters-rights-act-2026`
 
 export async function POST(request: Request) {
+  if (!checkRateLimit(request, 'rra-check')) {
+    return NextResponse.json(
+      { ok: false, error: 'Too many requests — please try again in a few minutes.' },
+      { status: 429 },
+    )
+  }
+
   let payload: Record<string, unknown>
   try {
     payload = (await request.json()) as Record<string, unknown>
@@ -26,8 +27,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'Invalid request.' }, { status: 400 })
   }
 
-  const email = String(payload.email ?? '').trim()
-  const honeypot = String(payload.company ?? '').trim()
+  const email = field(payload, 'email', MAX_EMAIL)
+  const honeypot = field(payload, 'company', MAX_NAME)
   const answers = (payload.answers ?? {}) as Record<string, string>
 
   // Honeypot: bots fill the hidden field; pretend success so they get no signal.
@@ -35,7 +36,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true })
   }
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!email || !EMAIL_RE.test(email)) {
     return NextResponse.json(
       { ok: false, error: 'Please enter a valid email address.' },
       { status: 400 },

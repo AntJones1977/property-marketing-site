@@ -10,14 +10,26 @@ export default function PrivacyPage() {
     <section className="py-16">
       <div className="mx-auto max-w-3xl px-6 prose prose-sm prose-gray">
         <h1 className="text-3xl font-bold tracking-tight mb-2">Privacy Policy</h1>
-        <p className="text-sm text-muted-foreground mb-8">Last updated: March 2026</p>
+        <p className="text-sm text-muted-foreground mb-8">Last updated: July 2026</p>
 
         <h2 className="text-xl font-semibold mt-8 mb-3">1. Data Controller</h2>
         <p className="text-muted-foreground leading-relaxed">
           MAR Property Investments Ltd (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is the data controller responsible for your personal data. We are registered in England & Wales.
         </p>
 
-        <h2 className="text-xl font-semibold mt-8 mb-3">2. Data We Collect</h2>
+        <h2 className="text-xl font-semibold mt-8 mb-3">2. This Website</h2>
+        <p className="text-muted-foreground leading-relaxed mb-3">
+          This marketing website sets no cookies and uses no analytics or tracking. It collects personal data in two places only:
+        </p>
+        <ul className="list-disc pl-6 space-y-1 text-muted-foreground text-sm">
+          <li><strong>Contact form:</strong> your name, email address, subject and message. We use these to respond to your enquiry (legitimate interests). Messages are delivered to our business inbox and retained for up to 12 months.</li>
+          <li><strong>Renters&rsquo; Rights Act readiness checker:</strong> your email address and your answers, used once to email you your score and action plan (performance of the service you requested). We do not add you to a marketing list.</li>
+        </ul>
+        <p className="text-muted-foreground leading-relaxed mt-3">
+          Emails from this website are sent via <strong>Resend</strong> (email delivery) and the site is hosted on <strong>Vercel</strong> (which processes standard server logs, including IP addresses, for security and operation). Both act as our processors.
+        </p>
+
+        <h2 className="text-xl font-semibold mt-8 mb-3">3. Data We Collect in PropertyApp</h2>
         <p className="text-muted-foreground leading-relaxed mb-3">When you use PropertyApp, we may collect:</p>
         <ul className="list-disc pl-6 space-y-1 text-muted-foreground text-sm">
           <li><strong>Identity data:</strong> Name, username, display name</li>
@@ -28,7 +40,7 @@ export default function PrivacyPage() {
           <li><strong>Usage data:</strong> Feature usage, login timestamps</li>
         </ul>
 
-        <h2 className="text-xl font-semibold mt-8 mb-3">3. How We Use Your Data</h2>
+        <h2 className="text-xl font-semibold mt-8 mb-3">4. How We Use Your Data</h2>
         <ul className="list-disc pl-6 space-y-1 text-muted-foreground text-sm">
           <li>To provide and maintain your PropertyApp account</li>
           <li>To process property and financial data as directed by you</li>
@@ -38,12 +50,12 @@ export default function PrivacyPage() {
           <li>To manage your subscription and billing</li>
         </ul>
 
-        <h2 className="text-xl font-semibold mt-8 mb-3">4. Lawful Basis</h2>
+        <h2 className="text-xl font-semibold mt-8 mb-3">5. Lawful Basis</h2>
         <p className="text-muted-foreground leading-relaxed">
           We process your data under the following lawful bases: contract performance (providing the service), legal obligation (financial record-keeping, HMRC requirements), legitimate interests (service improvement, security), and consent (marketing communications).
         </p>
 
-        <h2 className="text-xl font-semibold mt-8 mb-3">5. Data Security</h2>
+        <h2 className="text-xl font-semibold mt-8 mb-3">6. Data Security</h2>
         <ul className="list-disc pl-6 space-y-1 text-muted-foreground text-sm">
           <li>All data transmitted via HTTPS/TLS encryption</li>
           <li>Sensitive financial fields encrypted with AES-256-GCM at rest</li>
@@ -53,7 +65,7 @@ export default function PrivacyPage() {
           <li>Audit logging of all data access and modifications</li>
         </ul>
 
-        <h2 className="text-xl font-semibold mt-8 mb-3">6. Data Retention</h2>
+        <h2 className="text-xl font-semibold mt-8 mb-3">7. Data Retention</h2>
         <ul className="list-disc pl-6 space-y-1 text-muted-foreground text-sm">
           <li>Financial records: 7 years (HMRC requirement)</li>
           <li>Tenancy data: duration of tenancy + 12 months</li>
@@ -62,7 +74,7 @@ export default function PrivacyPage() {
           <li>Sessions: automatically purged when expired</li>
         </ul>
 
-        <h2 className="text-xl font-semibold mt-8 mb-3">7. Your Rights</h2>
+        <h2 className="text-xl font-semibold mt-8 mb-3">8. Your Rights</h2>
         <p className="text-muted-foreground leading-relaxed mb-3">Under UK GDPR, you have the right to:</p>
         <ul className="list-disc pl-6 space-y-1 text-muted-foreground text-sm">
           <li>Access your personal data (Article 15)</li>
@@ -74,12 +86,12 @@ export default function PrivacyPage() {
           <li>Withdraw consent at any time</li>
         </ul>
 
-        <h2 className="text-xl font-semibold mt-8 mb-3">8. Third-Party Services</h2>
+        <h2 className="text-xl font-semibold mt-8 mb-3">9. Third-Party Services</h2>
         <p className="text-muted-foreground leading-relaxed">
-          We use the following third-party services: Vercel (hosting), Neon (database), Stripe (billing), Anthropic Claude (AI receipt scanning), DocuSeal (e-signatures). Each processes data only as necessary to provide their service.
+          We use the following third-party services: Vercel (hosting), Neon (database), Stripe (billing), Anthropic Claude (AI receipt scanning), DocuSeal (e-signatures), Resend (transactional email). Each processes data only as necessary to provide their service.
         </p>
 
-        <h2 className="text-xl font-semibold mt-8 mb-3">9. Complaints</h2>
+        <h2 className="text-xl font-semibold mt-8 mb-3">10. Complaints</h2>
         <p className="text-muted-foreground leading-relaxed">
           If you have concerns about how we handle your data, please contact us first. You also have the right to lodge a complaint with the Information Commissioner&apos;s Office (ICO) at <span className="font-medium">ico.org.uk</span>.
         </p>

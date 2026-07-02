@@ -34,7 +34,7 @@ import {
 } from 'lucide-react'
 import type { Metadata } from 'next'
 
-const APP_URL = 'https://property-app-pi-fawn.vercel.app'
+import { APP_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Features — PropertyApp',

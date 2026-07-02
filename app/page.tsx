@@ -31,7 +31,7 @@ import {
 import Link from 'next/link'
 import { FeatureCard } from '@/components/feature-card'
 
-const APP_URL = 'https://property-app-pi-fawn.vercel.app'
+import { APP_URL } from '@/lib/site'
 
 const FEATURES = [
   {

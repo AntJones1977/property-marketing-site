@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, ChevronRight, Clock, Info, HelpCircle } from 'lucide-react'
 
-const APP_URL = 'https://property-app-pi-fawn.vercel.app'
+import { APP_URL } from '@/lib/site'
 
 export interface GuideSection {
   id: string
