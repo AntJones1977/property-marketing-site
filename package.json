@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start -p 3001"
+    "start": "next start -p 3001",
+    "typecheck": "tsc --noEmit"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.1",
@@ -14,7 +18,7 @@
     "@types/react-dom": "^19.2.3",
     "lucide-react": "^0.577.0",
     "next": "^16.1.6",
-    "postcss": "^8.5.8",
+    "postcss": "^8.5.10",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "resend": "^6.12.4",

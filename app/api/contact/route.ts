@@ -1,22 +1,25 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
-
-// Defaults are baked in so the form works as soon as RESEND_API_KEY is set.
-// Both are overridable via env without a code change.
-const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? 'Marpropertyinvestmentsltd@mail.com'
-const FROM_EMAIL =
-  process.env.CONTACT_FROM_EMAIL ?? 'PropertyApp <contact@marpropertyinvestments.co.uk>'
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-}
+import { CONTACT_TO_EMAIL as TO_EMAIL, CONTACT_FROM_EMAIL as FROM_EMAIL } from '@/lib/site'
+import { checkRateLimit } from '@/lib/rate-limit'
+import {
+  EMAIL_RE,
+  MAX_EMAIL,
+  MAX_MESSAGE,
+  MAX_NAME,
+  MAX_SUBJECT,
+  escapeHtml,
+  field,
+} from '@/lib/email'
 
 export async function POST(request: Request) {
+  if (!checkRateLimit(request, 'contact')) {
+    return NextResponse.json(
+      { ok: false, error: 'Too many messages — please try again in a few minutes.' },
+      { status: 429 },
+    )
+  }
+
   let payload: Record<string, unknown>
   try {
     payload = (await request.json()) as Record<string, unknown>
@@ -24,11 +27,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'Invalid request.' }, { status: 400 })
   }
 
-  const name = String(payload.name ?? '').trim()
-  const email = String(payload.email ?? '').trim()
-  const subject = String(payload.subject ?? '').trim()
-  const message = String(payload.message ?? '').trim()
-  const honeypot = String(payload.company ?? '').trim()
+  const name = field(payload, 'name', MAX_NAME)
+  const email = field(payload, 'email', MAX_EMAIL)
+  const subject = field(payload, 'subject', MAX_SUBJECT)
+  const message = field(payload, 'message', MAX_MESSAGE)
+  const honeypot = field(payload, 'company', MAX_NAME)
 
   // Honeypot: bots fill the hidden "company" field; humans never see it.
   // Pretend success so the bot has no signal to retry.
@@ -43,7 +46,7 @@ export async function POST(request: Request) {
     )
   }
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!EMAIL_RE.test(email)) {
     return NextResponse.json(
       { ok: false, error: 'Please enter a valid email address.' },
       { status: 400 },
@@ -85,6 +88,9 @@ export async function POST(request: Request) {
 
   // 2. Auto-acknowledge the enquirer. Best-effort — never fail the request
   // just because the confirmation copy didn't go out.
+  // Deliberately does NOT echo the message body: an acknowledgement that
+  // repeats caller-supplied prose would let this endpoint be abused to send
+  // arbitrary content to arbitrary addresses from our verified domain.
   try {
     const { error: ackError } = await resend.emails.send({
       from: FROM_EMAIL,
@@ -95,22 +101,16 @@ export async function POST(request: Request) {
 
 Thanks for getting in touch with PropertyApp. We’ve received your message and a member of our team will get back to you within one business day.
 
-For your records, here’s what you sent:
-
-Subject: ${subject}
-
-${message}
+If you didn’t contact us, you can safely ignore this email.
 
 Best regards,
 The PropertyApp team
-MAR Property Investments Ltd`,
+MAR Property & Investments Ltd`,
       html: `<p>Hi ${escapeHtml(name)},</p>
 <p>Thanks for getting in touch with PropertyApp. We&rsquo;ve received your message and a member of our team will get back to you within one business day.</p>
-<p>For your records, here&rsquo;s what you sent:</p>
-<p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
-<p style="white-space:pre-wrap">${escapeHtml(message)}</p>
+<p>If you didn&rsquo;t contact us, you can safely ignore this email.</p>
 <hr />
-<p>Best regards,<br />The PropertyApp team<br />MAR Property Investments Ltd</p>`,
+<p>Best regards,<br />The PropertyApp team<br />MAR Property & Investments Ltd</p>`,
     })
     if (ackError) {
       console.error('Contact form: acknowledgement email failed.', ackError)

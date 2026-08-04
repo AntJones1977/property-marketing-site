@@ -31,14 +31,26 @@ import {
 import Link from 'next/link'
 import { FeatureCard } from '@/components/feature-card'
 
-const APP_URL = 'https://property-app-pi-fawn.vercel.app'
+import { APP_URL } from '@/lib/site'
 
 const FEATURES = [
   {
-    icon: Landmark,
-    title: 'SA105 + CT600 + SA900 — Three Tax Surfaces',
+    icon: Banknote,
+    title: 'Bank Statement Reconciliation',
     description:
-      'The only UK landlord tool covering Personal (SA105), Limited Company (CT600) and Estate/Trust (SA900/SA903) returns side by side. Records-first running costs, mid-year rate-change splits, per-property drill-down, and a per-return filing tracker across all three.',
+      'Import CSV or PDF statements (AI extracts the transactions — no bank connection required), auto-match rent in and mortgages, repairs and subscriptions out, clear the residue in bulk, and prove every month with real statement arithmetic: opening + credits − debits = closing.',
+  },
+  {
+    icon: Landmark,
+    title: 'Four Return Types Under One Roof',
+    description:
+      'The only UK landlord tool covering Personal (SA105), Limited Company (CT600), MTD ITSA quarterly updates and Estate/Trust (SA900/SA903) side by side. Records-first running costs, mid-year rate-change splits, per-property drill-down, and a per-return filing tracker.',
+  },
+  {
+    icon: UserCheck,
+    title: 'Accountant Portal & Export Packs',
+    description:
+      'A read-only accountant login scoped to the years you’ve locked and filed, plus branded export packs for every return — SA105 personally branded, CT600 company-branded with month-by-month supplementary pages, MTD rendered in the actual HMRC submission format. Same calculators as your screens, never a re-keyed copy.',
   },
   {
     icon: Scroll,
@@ -80,13 +92,13 @@ const FEATURES = [
     icon: FileSpreadsheet,
     title: 'Making Tax Digital (MTD)',
     description:
-      'Quarterly SA105 submissions direct to HMRC via Government Gateway. Pre-submission integrity checks, fraud prevention headers, Final Declaration workflow, and full audit trail.',
+      'Statutorily correct quarterly updates (HMRC connection currently sandbox) with figure-level drill-through — click any number and see the transactions behind it — and a quarterly-update PDF export in the actual HMRC submission format, so approving the PDF is approving the submission.',
   },
   {
     icon: FileCheck,
-    title: 'Tax-Year Lock + Accountant Share',
+    title: 'Lock, Seal & Audit the Year',
     description:
-      'Emerald Lock / amber Unlock on SA105 and CT600. Once locked, the daily bank-feed cron and the manual-match drawer refuse retro-matches into the period, and a one-click "Email summary to accountant" link goes out alongside the PDF.',
+      'Lock a reviewed year, then seal it as actual figures — protected from edits and retro bank-feed matching, per return type. Audit and drift reports show expected vs booked per property per month, with missing months named and one-click booking where statements simply don’t exist.',
   },
   {
     icon: Banknote,
@@ -151,16 +163,17 @@ const FEATURES = [
 ]
 
 const TRUST_POINTS = [
-  { icon: Landmark, text: 'Personal + Company + Estate (SA105 · CT600 · SA900)' },
+  { icon: Banknote, text: 'Bank statement reconciliation (CSV + AI PDF)' },
+  { icon: Landmark, text: 'Four return types (SA105 · CT600 · MTD · SA900)' },
+  { icon: UserCheck, text: 'Accountant Portal + branded export packs' },
   { icon: RefreshCw, text: 'Form 4A statutory rent-review workflow' },
   { icon: Home, text: '30+ UK councils HMO licensing data' },
   { icon: Scale, text: 'Section 42 statutory workflow' },
-  { icon: BarChart3, text: 'HMRC MTD-ready (sandbox)' },
-  { icon: Banknote, text: 'Open Banking auto-match (TrueLayer, AIS-only)' },
+  { icon: BarChart3, text: 'HMRC-format MTD export packs (submission sandbox)' },
   { icon: LineChart, text: 'Rent Review Insights with ONS index' },
   { icon: Bell, text: 'Renters\u2019 Rights Act 2025 \u2014 Wave 1 + 2 dispatch' },
   { icon: Lock, text: 'AES-256-GCM + GDPR + audit log' },
-  { icon: Zap, text: '3,254 regression tests across 243 suites' },
+  { icon: Zap, text: '~4,800 regression tests + 59 Playwright E2E specs' },
 ]
 
 export default function HomePage() {
@@ -194,15 +207,15 @@ export default function HomePage() {
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight max-w-4xl mx-auto leading-tight">
-            Personal, company, estate and HMO portfolios,{' '}
-            <span className="text-primary">one platform</span>
+            From bank statement to{' '}
+            <span className="text-primary">sealed tax return</span>
           </h1>
 
           <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            The only UK landlord software that covers SA105, CT600 and SA900/SA903 (estate &amp; trust)
-            returns, Section 42 leasehold extensions, Renters&rsquo; Rights Act 2025, Form 4A statutory
-            rent reviews, and end-to-end HMO compliance. Built for landlords running personal, joint, SPV
-            and inherited-estate portfolios.
+            SA105, CT600, MTD and Trust &amp; Estate — with the evidence attached. Import your bank
+            statements, reconcile every month, land every pound on the right return, then seal the year
+            and hand your accountant a pack they&rsquo;ll actually accept. Plus Section 42, Renters&rsquo;
+            Rights Act 2025, Form 4A rent reviews and end-to-end HMO compliance.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
@@ -231,16 +244,16 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <p className="text-2xl font-bold">3 tax surfaces</p>
-              <p className="text-sm text-muted-foreground">SA105, CT600 &amp; SA900/SA903</p>
+              <p className="text-2xl font-bold">4 return types</p>
+              <p className="text-sm text-muted-foreground">SA105, CT600, MTD &amp; SA900/SA903</p>
             </div>
             <div>
               <p className="text-2xl font-bold">30+</p>
               <p className="text-sm text-muted-foreground">UK councils HMO data</p>
             </div>
             <div>
-              <p className="text-2xl font-bold">AIS-only</p>
-              <p className="text-sm text-muted-foreground">Open Banking auto-match</p>
+              <p className="text-2xl font-bold">CSV + PDF</p>
+              <p className="text-sm text-muted-foreground">Bank statement reconciliation</p>
             </div>
             <div>
               <p className="text-2xl font-bold">UK</p>
@@ -256,8 +269,8 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold tracking-tight">Everything a professional UK landlord needs</h2>
             <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
-              From CT600 company returns and HMO compliance to Section 42 leasehold extensions &mdash; features
-              no other tool in the UK brings together.
+              From bank-statement reconciliation and CT600 company returns to HMO compliance and Section 42
+              leasehold extensions &mdash; features no other tool in the UK brings together.
             </p>
           </div>
 

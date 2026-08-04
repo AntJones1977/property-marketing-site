@@ -3,11 +3,12 @@ import { Geist } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
+import { SITE_URL } from '@/lib/site'
 
 const geistSans = Geist({ subsets: ['latin'], variable: '--font-geist-sans' })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.marpropertyinvestments.co.uk'),
+  metadataBase: new URL(SITE_URL),
   title: 'PropertyApp — Property Portfolio Management for UK Landlords',
   description:
     'Track properties, mortgages, tenants, compliance, and tax returns in one place. Purpose-built for UK buy-to-let landlords. Free for up to 3 properties.',
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     title: 'PropertyApp — Property Portfolio Management for UK Landlords',
     description:
       'SA105, CT600 and SA900/SA903 tax returns, Renters’ Rights Act 2026 compliance, HMO and leasehold — all in one place. Built for UK landlords.',
-    url: 'https://www.marpropertyinvestments.co.uk',
+    url: SITE_URL,
     siteName: 'PropertyApp',
     locale: 'en_GB',
     type: 'website',
