@@ -5,7 +5,7 @@ import { APP_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'About — PropertyApp',
-  description: 'Learn about MAR Property & Investments Ltd and the team behind PropertyApp.',
+  description: 'Learn about MAR Property Investments Ltd and the team behind PropertyApp.',
 }
 
 const VALUES = [
@@ -46,7 +46,7 @@ export default function AboutPage() {
               Built by landlords, for landlords
             </h1>
             <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-              PropertyApp is a product of MAR Property & Investments Ltd. We built it because we needed
+              PropertyApp is a product of MAR Property Investments Ltd. We built it because we needed
               it ourselves &mdash; a straightforward tool to manage a growing personal, joint and SPV
               portfolio with HMO and leasehold exposure, without the overhead of enterprise software
               or the limitations of spreadsheets.
@@ -114,7 +114,7 @@ export default function AboutPage() {
           <div className="max-w-3xl">
             <h2 className="text-2xl font-bold tracking-tight mb-4">Company details</h2>
             <div className="rounded-xl border border-border p-6 space-y-2">
-              <p className="text-sm"><span className="font-medium">Company:</span> <span className="text-muted-foreground">MAR Property & Investments Ltd</span></p>
+              <p className="text-sm"><span className="font-medium">Company:</span> <span className="text-muted-foreground">MAR Property Investments Ltd</span></p>
               <p className="text-sm"><span className="font-medium">Registered:</span> <span className="text-muted-foreground">England & Wales</span></p>
               <p className="text-sm"><span className="font-medium">Product:</span> <span className="text-muted-foreground">PropertyApp — Property Portfolio Management Software</span></p>
             </div>
