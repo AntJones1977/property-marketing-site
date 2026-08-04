@@ -105,12 +105,12 @@ If you didn’t contact us, you can safely ignore this email.
 
 Best regards,
 The PropertyApp team
-MAR Property & Investments Ltd`,
+MAR Property Investments Ltd`,
       html: `<p>Hi ${escapeHtml(name)},</p>
 <p>Thanks for getting in touch with PropertyApp. We&rsquo;ve received your message and a member of our team will get back to you within one business day.</p>
 <p>If you didn&rsquo;t contact us, you can safely ignore this email.</p>
 <hr />
-<p>Best regards,<br />The PropertyApp team<br />MAR Property & Investments Ltd</p>`,
+<p>Best regards,<br />The PropertyApp team<br />MAR Property Investments Ltd</p>`,
     })
     if (ackError) {
       console.error('Contact form: acknowledgement email failed.', ackError)

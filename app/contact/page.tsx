@@ -170,7 +170,7 @@ export default function ContactPage() {
                   <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
                     <Building2 className="h-5 w-5 text-primary" />
                   </div>
-                  <h3 className="font-semibold">MAR Property & Investments Ltd</h3>
+                  <h3 className="font-semibold">MAR Property Investments Ltd</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Registered in England & Wales

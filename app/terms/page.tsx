@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Terms of Service — PropertyApp',
-  description: 'Terms of service for PropertyApp by MAR Property & Investments Ltd.',
+  description: 'Terms of service for PropertyApp by MAR Property Investments Ltd.',
 }
 
 export default function TermsPage() {
@@ -14,7 +14,7 @@ export default function TermsPage() {
 
         <h2 className="text-xl font-semibold mt-8 mb-3">1. Agreement</h2>
         <p className="text-muted-foreground leading-relaxed">
-          By creating an account and using PropertyApp, you agree to these Terms of Service. PropertyApp is provided by MAR Property & Investments Ltd, registered in England & Wales.
+          By creating an account and using PropertyApp, you agree to these Terms of Service. PropertyApp is provided by MAR Property Investments Ltd, registered in England & Wales.
         </p>
 
         <h2 className="text-xl font-semibold mt-8 mb-3">2. Service Description</h2>
