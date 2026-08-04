@@ -2,7 +2,7 @@
 // Never hardcode these values in pages, components or API routes.
 
 /** The PropertyApp product (signup / login CTAs). */
-export const APP_URL = 'https://property-app-pi-fawn.vercel.app'
+export const APP_URL = 'https://marpropertyinvestments-app.co.uk'
 
 /** This marketing site's canonical origin. */
 export const SITE_URL = 'https://www.marpropertyinvestments.co.uk'

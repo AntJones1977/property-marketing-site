@@ -39,7 +39,7 @@ import { APP_URL } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Features — PropertyApp',
   description:
-    'SA105 + CT600 + SA900/SA903 (estate/trust) tax returns, a per-return filing tracker, HMO compliance, Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 Wave 1 + 2 dispatch, MTD quarterly submissions, Growth Plan snapshots, tenant referencing, and more \u2014 the only UK landlord software that covers personal, company, estate and HMO portfolios end to end.',
+    'Bank-statement reconciliation (CSV + AI PDF import), SA105 + CT600 + SA900/SA903 (estate/trust) tax returns with accountant-ready export packs, an Accountant Portal, MTD quarterly updates with figure-level drill-through, HMO compliance, Section 42 leasehold extensions, Renters\u2019 Rights Act 2025 Wave 1 + 2 dispatch, and more \u2014 the only UK landlord software that runs the money story end to end: bank statement in \u2192 reconciled \u2192 right return \u2192 sealed \u2192 exported.',
 }
 
 const FEATURE_SECTIONS = [
@@ -121,16 +121,32 @@ const FEATURE_SECTIONS = [
         icon: FileSpreadsheet,
         title: 'Making Tax Digital (MTD)',
         description:
-          'Submit quarterly income and expense updates directly to HMRC for MTD for Income Tax. Personal-only (SA105) \u2014 company properties report via CT600, not MTD ITSA.',
+          'Quarterly MTD for Income Tax updates, statutorily correct and fully evidenced (HMRC connection currently sandbox \u2014 production credentials in progress). Personal-only (SA105) \u2014 company properties report via CT600, not MTD ITSA. Click any figure on the quarter breakdown and see every transaction behind it.',
         bullets: [
           'Quarterly dashboard with deadline countdown',
-          'Per-property HMRC field mapping (SA105 boxes)',
-          'Pre-submission integrity checks and validation',
-          'Secure OAuth2 connection to Government Gateway',
+          'Statutorily correct thresholds \u2014 deadlines on the 7th of the following month, each mandation wave judged on the return filed two years earlier, other qualifying income counted, filed actuals trusted over stray partial records',
+          'Figure-level drill-through \u2014 rent payments, expenses, recurring-charge formulas and the Section 24 calculation behind every cell',
+          'Book missing rent directly from the drill-through; the dashboard updates in place',
+          'Quarterly-update PDF export in the actual HMRC submission format (Property Business API field paths + SA105 box references)',
+          'Eight pre-submission integrity checks and validation',
+          'Secure OAuth2 connection to Government Gateway (sandbox today)',
           'HMRC fraud prevention headers (mandatory)',
           'Final Declaration workflow with year-end adjustments',
           'Full submission audit trail with HMRC receipt references',
-          'Reconciliation PDF reports for accountant review',
+          'Supplementary transaction page listing every line item behind every submitted figure',
+        ],
+      },
+      {
+        icon: UserCheck,
+        title: 'Accountant Portal & Export Packs',
+        description:
+          'Give your accountant a read-only login scoped to the years you\u2019ve locked and filed, for only the returns you\u2019ve assigned to them. Every export pack \u2014 SA105, CT600, MTD \u2014 reads the same calculators as your own screens, never a re-keyed copy.',
+        bullets: [
+          'Read-only Accountant Portal \u2014 sees only locked/filed years for assigned returns',
+          'Accountants managed as first-class Reference Data \u2014 invite, password-reset, deactivate',
+          'SA105 pack personally branded; CT600 pack company-branded on every page',
+          'CT600 supplementary pages \u2014 month-by-month income per property + itemised operating costs, each guaranteed to total the summary line it backs',
+          'Three forwarding channels: portal, sealed reconciliation PDF (download or email), export packs',
         ],
       },
       {
@@ -176,6 +192,49 @@ const FEATURE_SECTIONS = [
   {
     category: 'Banking & Reconciliation',
     features: [
+      {
+        icon: FileText,
+        title: 'Bank Statement Import — CSV & AI PDF',
+        description:
+          'No live bank connection required. Drop in CSV exports or scanned PDF statements — AI extracts the transactions for on-screen review — and reconcile a whole year of banking without waiting for Open Banking consent.',
+        bullets: [
+          'CSV and AI-powered PDF statement extraction (review before anything books)',
+          'Bulk-stage several statements across several accounts, process in one pass',
+          'Re-importing an overlapping statement never duplicates what you already loaded',
+          'Same-statement, cross-account and drifted-description duplicates detected by content and skipped at import',
+          'Statement-coverage dates on every account tile',
+        ],
+      },
+      {
+        icon: RefreshCw,
+        title: 'Auto-Match & Month-First Reconciliation',
+        description:
+          'Rent in; mortgages, repairs, certificates and subscriptions out — recognised and reconciled automatically, then proven month by month with real statement arithmetic: opening + credits − debits = closing. A month only reads "reconciled" when it actually balances.',
+        bullets: [
+          'Auto-match income and outgoings, including capital movements and inter-account transfers',
+          'A bank debit that matches a scanned receipt links to it rather than double-counting it',
+          'Leftover transactions group by counterparty — clear a whole supplier or tenant in one action',
+          'Reusable match rules — the same payee auto-matches next time',
+          'Split shared costs — one payment part-personal, part-company, with a live remainder that must hit £0.00 before it books',
+          'Mortgage-payment cleanup — finds mortgage payments wrongly booked as expenses and clears the safe ones in one click',
+          'Every pipeline-created ledger entry badged by how it got there, and reversible',
+        ],
+      },
+      {
+        icon: Lock,
+        title: 'Year Close & Seal + Audit & Drift Reports',
+        description:
+          'The missing final step of a return’s life. Per-property, per-month expected-vs-booked reports with missing months named — then seal the signed-off year as an immutable snapshot your accountant can trust.',
+        bullets: [
+          'Audit report per property per month: expected vs actually booked, totals tie exactly to the tax pages',
+          'Structural reconciling items (like mortgage payments) explained rather than alarmed',
+          'One-click booking of expected values where source statements simply don’t exist — current or prior years',
+          'Seal a locked year as actual figures — protected from accidental edits and retro bank-feed matching',
+          'Sealed years become ground truth (e.g. for the MTD mandation threshold)',
+          'Per-return-type locks — closing your personal year never blocks company bookkeeping',
+          'Download the sealed snapshot as a PDF or email it straight to your accountant',
+        ],
+      },
       {
         icon: Banknote,
         title: 'Open Banking + Auto-match',
@@ -564,7 +623,7 @@ const FEATURE_SECTIONS = [
           'Property status (Active, Buying, Selling, Issue)',
           'Mortgage renewal alerts with countdown',
           'Portfolio summary PDF export',
-          'Six ownership states \u2014 SINGLE, JOINT, COMPANY, MANAGED, ESTATE, TRUST',
+          'Six ownership states \u2014 SINGLE, JOINT, COMPANY, MANAGED, ESTATE, TRUST \u2014 plus a Short-term let (Airbnb) property type: no tenancy, no AST, no named tenant required \u2014 book rent, record payments and raise maintenance tenancy-less, end to end',
           'MANAGED shown operationally (excluded from every tax surface); ESTATE / TRUST routed to the SA900/SA903 surface and excluded from SA105 / CT600 / MTD',
           'Delete vs Archive \u2014 two lifecycles. Delete cleans everything for properties that never completed; Archive preserves history for sold properties',
         ],
@@ -602,7 +661,7 @@ const FEATURE_SECTIONS = [
         icon: Lock,
         title: 'Audit Log, GDPR, Multi-User & Self-Host',
         description:
-          'Privacy, security and compliance built in \u2014 important for landlords handling tenant data under DPA / UK GDPR obligations. Plan-tier feature gating, an Owner role and multi-user invites with full invite audit. 3,254 regression tests across 243 suites keep cascade-locked contracts pinned at build time.',
+          'Privacy, security and compliance built in \u2014 important for landlords handling tenant data under DPA / UK GDPR obligations. Plan-tier feature gating, an Owner role and multi-user invites with full invite audit. ~4,800 regression tests across 371 suites (plus 59 Playwright end-to-end specs) keep cascade-locked contracts pinned at build time.',
         bullets: [
           'AES-256-GCM encryption at rest',
           'Per-account isolated database',
@@ -612,7 +671,7 @@ const FEATURE_SECTIONS = [
           'Plan-tier feature gating with one-click upgrade prompts',
           'GDPR data export and erasure',
           'Self-hosted deployment option (Portfolio / Agent tier)',
-          '3,254 regression tests across 243 suites \u2014 cascade-locked contract tests fail the build if a route bypasses the canonical writer',
+          '~4,800 regression tests across 371 suites + 59 Playwright E2E specs \u2014 cascade-locked contract tests fail the build if a route bypasses the canonical writer',
           'Pre-push build validation on every release',
         ],
       },
@@ -630,9 +689,11 @@ export default function FeaturesPage() {
             Every feature a professional UK landlord needs
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-            Built for landlords running personal, joint, SPV and inherited-estate portfolios with HMO and
-            leasehold exposure. The only UK tool that combines SA105 + CT600 + SA900/SA903 (estate/trust),
-            Section 42, Renters&rsquo; Rights Act 2025, and HMO end-to-end compliance in one product.
+            From bank statement to sealed tax return — SA105, CT600, MTD and Trust &amp; Estate, with the
+            evidence attached. Built for landlords running personal, joint, SPV and inherited-estate
+            portfolios with HMO and leasehold exposure. The only UK tool that combines four return types,
+            bank-statement reconciliation, Section 42, Renters&rsquo; Rights Act 2025, and HMO end-to-end
+            compliance in one product.
           </p>
         </div>
       </section>
